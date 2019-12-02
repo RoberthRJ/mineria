@@ -1,0 +1,229 @@
+body {
+  font-family: "Muli";
+  background-color: #FFFFFF;
+}
+
+p {
+  font-family: "Muli";
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "PT Serif";
+}
+
+nav {
+  font-family: "Muli";
+  height: 80px;
+  background: white transparent;
+  z-index: 2;
+}
+
+nav img {
+  height: 80px;
+  width: auto;
+  padding-left: 10px;
+}
+
+nav a {
+  color: #FFFFFF;
+}
+
+nav a:hover {
+  color: #FFFFFF;
+}
+
+nav ul li {
+  padding-left: 10px;
+}
+
+nav ul li a {
+  color: #FFFFFF;
+}
+
+nav ul li a:hover {
+  color: #FFFFFF;
+}
+
+nav ul li .btn-register {
+  border: 0.5px solid #FFFFFF;
+  border-radius: 4px;
+}
+
+#banner {
+  position: relative;
+  top: -80px;
+  background-image: url(/images/background-banner-4.jpg?7aa164df6ba153d59f47ee63be993e05);
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 700px;
+}
+
+#banner .banner-text {
+  position: relative;
+  top: 60%;
+  color: #FFFFFF;
+}
+
+#banner .banner-text p {
+  padding-top: 50px;
+}
+
+#banner form {
+  background-color: #FFFFFF;
+  border-radius: 5px;
+  box-shadow: 0px 0px 9px -1px rgba(0, 0, 0, 0.46);
+  position: relative;
+  top: 80%;
+}
+
+#banner form input {
+  padding: 30px 20px 30px 20px;
+}
+
+#banner form select {
+  height: 62px;
+}
+
+#explore {
+  position: relative;
+  top: -80px;
+  padding-bottom: 35px;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+#explore h3 {
+  padding-top: 15px;
+}
+
+#explore .custom-card {
+  margin: 10px 10px 10px 10px;
+  width: 33%;
+  padding: 1px;
+  border-radius: 8px;
+  box-shadow: 0px 0px 9px -1px rgba(0, 0, 0, 0.46);
+  cursor: pointer;
+}
+
+#explore .custom-card img {
+  max-width: 33%;
+  border-radius: 8px 0px 0px 8px;
+}
+
+#explore .custom-card .card-text {
+  width: 66%;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+          flex-direction: column;
+}
+
+#explore .custom-card .card-text p {
+  margin: 0;
+  position: relative;
+  padding-left: 20px;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
+#help {
+  position: relative;
+  top: -80px;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+#help img {
+  position: relative;
+  width: 100%;
+  border-radius: 8px;
+}
+
+#help .help-text {
+  position: absolute;
+  color: #FFFFFF;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
+#help .help-text h3 {
+  padding-bottom: 20px;
+}
+
+#help .help-text button {
+  background-color: #FFFFFF;
+  width: 150px;
+}
+
+#help .help-text button i {
+  padding-left: 10px;
+}
+
+#help .card-container {
+  padding-bottom: 10px;
+}
+
+#help .card-container .help-card {
+  cursor: pointer;
+  padding: 20px 25px 25px 20px;
+  background-color: #FFFFFF;
+  border-radius: 8px;
+  height: 70px;
+}
+
+#help .card-container .help-card img {
+  width: 30px;
+  height: 30px;
+}
+
+#help .card-container .help-card p {
+  padding-left: 10px;
+}
+
+#help .card-container .help-card:hover {
+  box-shadow: 0px 0px 9px -1px rgba(0, 0, 0, 0.46);
+}
+
+#cards {
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.main-card {
+  cursor: pointer;
+}
+
+.main-card img {
+  border-radius: 5px;
+}
+
+.main-card .title-card span {
+  padding: 2px 8px;
+  border: 1px solid #000000;
+  border-radius: 2px;
+}
+
+.main-card .title-card p {
+  padding: 0px;
+  margin: 0px;
+}
+
+.main-card .text-card {
+  line-height: 0px;
+}
+
+.main-card .text-card .price p:nth-child(even) {
+  position: relative;
+  top: -25px;
+}
+

@@ -2,9 +2,13 @@
 
 namespace App;
 
-use Illuminate\Notifications\Notifiable;
+use App\Company;
+use App\Proffesional;
+use App\Role;
+use App\UserSocialAccount;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
@@ -36,4 +40,29 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+    public function pathAttachment () {
+        return "/images/users/" . $this->picture;
+    }
+
+    public static function navigation () {
+        return auth()->check() ? auth()->user()->role->name : 'guest';
+    }
+
+    public function role () {
+        return $this->belongsTo(Role::class);
+    }
+
+    public function company () {
+        return $this->hasOne(Company::class);
+    }
+
+    public function proffesional () {
+        return $this->hasOne(Proffesional::class);
+    }
+
+    public function socialAccount () {
+        return $this->hasOne(UserSocialAccount::class);
+    }
 }
