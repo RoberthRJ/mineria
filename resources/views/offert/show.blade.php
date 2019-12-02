@@ -10,14 +10,13 @@
 <section id="images">
 	<div class="container pb-2">
 		<div class="row">
-
 			<div class="col-sm-12 no-gutters d-flex company">
 				<img src="assets/images/details/portada.jpg" alt="">
 				<div class="company-desc pl-3">
-					<h4>Los Naranjos SAC</h4>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Temporibus pariatur, recusandae repellendus ea veniam possimus aliquid dolor, soluta iste repellat ex consectetur quidem voluptatibus rerum ad voluptates tenetur. Beatae, adipisci.</p>
-					<p>reclutamiento@losnaranjos.com</p>
-					<p>www.losnaranjos.com</p>
+					<h4>{{$offert->company->title}}</h4>
+					<p>{{$offert->company->biography}}</p>
+					<p>{{$offert->company->user->email}}</p>
+					<p>{{$offert->company->website}}</p>
 				</div>
 			</div>	
 		</div>
@@ -110,11 +109,12 @@
 				<h4>Empleos relacionados</h4>
 			</div>
 			<div class="cards col-sm-12">
-
+				
+			@foreach($related as $related)
 
 				@include('offert.related-card')
 				
-
+			@endforeach
 			</div>
 		</div>
 	</div>
@@ -174,6 +174,8 @@
 <footer>
 	
 </footer>
+
+@endsection
 
 @push('scripts')
 

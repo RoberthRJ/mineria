@@ -42,27 +42,31 @@
             <div class="col-sm-12">
                 <h3>Explora diversas opciones</h3>
             </div>
-            <div class="d-flex">
-                <div class="custom-card d-flex" style="height: 5rem">
-                    <img src="assets/images/card/card-1.jpg" alt="" class="img-fluid">
-                    <div class="card-text">
-                        <p>Busco servicios mineros</p>
+            <div class="col-sm-12 no-gutters d-flex">
+                <a href="#">
+                    <div class="custom-card d-flex" style="height: 5rem">
+                        <img src="assets/images/card/card-1.jpg" alt="" class="img-fluid">
+                        <div class="card-text">
+                            <p>Busco servicios mineros</p>
+                        </div>
                     </div>
-                </div>
-
-                <div class="custom-card d-flex" style="height: 5rem">
-                    <img src="assets/images/card/card-2.jpg" alt="" class="img-fluid">
-                    <div class="card-text">
-                        <p>Oferta tus servicios</p>
+                </a>
+                <a href="#">
+                    <div class="custom-card d-flex" style="height: 5rem">
+                        <img src="assets/images/card/card-2.jpg" alt="" class="img-fluid">
+                        <div class="card-text">
+                            <p>Oferta tus servicios</p>
+                        </div>
                     </div>
-                </div>
-
-                <div class="custom-card d-flex" style="height: 5rem">
-                    <img src="assets/images/card/card-3.jpg" alt="" class="img-fluid">
-                    <div class="card-text">
-                        <p>Encuentra empleo</p>
+                </a>
+                <a href="#">
+                    <div class="custom-card d-flex" style="height: 5rem">
+                        <img src="assets/images/card/card-3.jpg" alt="" class="img-fluid">
+                        <div class="card-text">
+                            <p>Encuentra empleo</p>
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
         </div>
     </div>
@@ -92,7 +96,11 @@
             </div>
             <div class="pt-2">
 
+                @foreach($services as $service)
+
                 @include('shared.index-card')
+
+                @endforeach
 
             </div>
         </div>

@@ -51,17 +51,14 @@ class OffertController extends Controller
     {
         $offert->load([
             'company' => function ($q) {
-                $q->select('id', 'title');
+                $q->select('id', 'user_id', 'title', 'website', 'biography');
             },
             'company.user'
         ])->get();
 
-        dd($offert);
+        $related = $offert->relatedOfferts();
 
-        $related = $course->relatedCourses();
-
-        return view('courses.detail', compact('course', 'related'));
-        return view('offert.show');
+        return view('offert.show', compact('offert', 'related'));
     }
 
     /**

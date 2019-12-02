@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Company;
+use App\Consumer;
 use Illuminate\Database\Eloquent\Model;
 
 class Service extends Model
@@ -18,11 +20,15 @@ class Service extends Model
     }
 
     public function company () {
-		return $this->belongsTo(App\Company::class)->select('id', 'name');
+		return $this->belongsTo(Company::class)->select('id','user_id', 'title');
 	}
 
 	public function consumers () {
-    	return $this->belongsToMany(App\Consumer::class);
+    	return $this->belongsToMany(Consumer::class);
+    }
+
+    public function location () {
+        return $this->belongsTo(Location::class)->select('id', 'department', 'province');
     }
 
     public function getRouteKeyName() {
