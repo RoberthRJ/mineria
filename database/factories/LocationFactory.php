@@ -6,8 +6,10 @@ use App\Location;
 use Faker\Generator as Faker;
 
 $factory->define(Location::class, function (Faker $faker) {
+	$department = $faker->state;
     return [
-        'department' => $faker->state,
+        'department' => $department,
+        'slug' => str_slug($department, '-'),
         'province' => $faker->city
     ];
 });

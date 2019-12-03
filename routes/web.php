@@ -14,12 +14,30 @@
 
 Auth::routes();
 
+Route::get('/images/{path}/{attachment}', function($path, $attachment) {
+	$file = sprintf('storage/%s/%s', $path, $attachment);
+	if(File::exists($file)) {
+		return Image::make($file)->response();
+	}
+});
+
 Route::get('/', 'HomeController@index')->name('home.index');
 
 Route::prefix('offert')->group(function () {
 
 	Route::get('/', 'OffertController@index')->name('offert.index');
 
+	Route::get('/d/{location}', 'OffertController@location')->name('offert.location');
+
+	Route::post('/', 'OffertController@list')->name('offert.list');
+
 	Route::get('/{offert}', 'OffertController@show')->name('offert.show');
 
+});
+
+
+Route::prefix('company')->group(function () {
+
+	Route::post('/{company}', 'CompanyController@mail')->name('company.mail');
+	
 });

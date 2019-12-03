@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Location;
 use App\Offert;
 use Illuminate\Http\Request;
 
@@ -14,8 +15,7 @@ class OffertController extends Controller
      */
     public function index()
     {
-        $offerts = Offert::latest()
-                            ->paginate(12);
+        $offerts = Offert::latest()->paginate(12);
 
         return view('offert.index', compact('offerts'));
     }
@@ -25,6 +25,25 @@ class OffertController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function list(Request $request){
+        // dd($request['category_id']);
+        $offerts = Offert::where('category_id', $request['category_id'])->where('company_id', $request['location'])
+                            ->paginate(12);
+
+        dd($offerts);
+
+        return view('offert.index', compact('offerts'));
+    }
+
+    public function location(Location $location){
+
+        $offerts = Offert::whereLocationId($location->id)->paginate(12);
+
+        return view('offert.index', compact('offerts'));
+    }
+
+
     public function create()
     {
         //

@@ -18,6 +18,12 @@ class CreateCategoriesTable extends Migration
             $table->string('category');
             $table->timestamps();
         });
+
+        Schema::create('areas', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('area');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -28,5 +34,6 @@ class CreateCategoriesTable extends Migration
     public function down()
     {
         Schema::dropIfExists('categories');
+        Schema::dropIfExists('areas');
     }
 }

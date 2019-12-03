@@ -11,9 +11,10 @@ $factory->define(Offert::class, function (Faker $faker) {
         'company_id' => App\Company::all()->random()->id,
         'category_id' => App\Category::all()->random()->id,
         'location_id' => App\Location::all()->random()->id,
+        'area_id' => App\Area::all()->random()->id,
         'title' => $title,
         'description' => $faker->paragraph,
         'slug' => str_slug($title, '-'),
-        'expiration_date' => $faker->DateTime('2020-01-25 08:37:17', 'America/Lima')
+        'expiration_date' => $faker->dateTimeInInterval('now', '+ 40 days', 'America/Lima')
     ];
 });

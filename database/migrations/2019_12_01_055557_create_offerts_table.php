@@ -22,6 +22,8 @@ class CreateOffertsTable extends Migration
             $table->foreign('category_id')->references('id')->on('categories');
             $table->unsignedInteger('location_id');
             $table->foreign('location_id')->references('id')->on('locations');
+            $table->unsignedInteger('area_id');
+            $table->foreign('area_id')->references('id')->on('areas');
             $table->string('title');
             $table->text('description');
             $table->string('slug');

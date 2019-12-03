@@ -15,7 +15,8 @@
                     <h1>Agenda Minera Perú</h1>
                     <p>Conecta con cientos de serviciis mineros a nivel nacional, encuentra al más cercano a tu zona.</p>
                 </div>
-                <form>
+                <form method="POST" action="{{route('offert.list')}}">
+                    @csrf
                     <div class="input-group">
                         <input type="text" class="form-control" placeholder="Ubicación" name="location" id="location">
                         <select class="custom-select" id="category_id" name="category_id">

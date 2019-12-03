@@ -27,9 +27,9 @@
 					<div class="filter col-md-3">
 						<h4>Filtros</h4>
 						<hr>
-						<p><b>Provincia</b></p>
+						<p><b>Departamento</b></p>
 						@foreach(\App\Location::orderBy('department')->pluck('department', 'id') as $id => $department)
-                            <a href="#">{{$department}}</a><br>
+                            <a href="{{route('offert.location', str_slug($department, '-'))}}">{{$department}}</a><br>
                         @endforeach
 
 						<p><b>Área</b></p>
@@ -56,23 +56,7 @@
 
 						<hr>
 
-						
-						<ul class="pagination">
-							<li class="page-item disabled">
-								<span class="page-link">Previous</span>
-							</li>
-							<li class="page-item"><a class="page-link" href="#">1</a></li>
-							<li class="page-item active">
-								<span class="page-link">
-									2
-									<span class="sr-only">(current)</span>
-								</span>
-							</li>
-							<li class="page-item"><a class="page-link" href="#">3</a></li>
-							<li class="page-item">
-								<a class="page-link" href="#">Next</a>
-							</li>
-						</ul>
+						{{ $offerts->links() }}
 
 					</div>
 				</div>

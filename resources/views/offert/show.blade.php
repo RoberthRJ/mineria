@@ -11,7 +11,7 @@
 	<div class="container pb-2">
 		<div class="row">
 			<div class="col-sm-12 no-gutters d-flex company">
-				<img src="assets/images/details/portada.jpg" alt="">
+				<img src="{{$offert->company->user->pathAttachment()}}" alt="">
 				<div class="company-desc pl-3">
 					<h4>{{$offert->company->title}}</h4>
 					<p>{{$offert->company->biography}}</p>
@@ -31,7 +31,7 @@
 			<div class="col-sm-7">
 				<div class="header d-flex">
 					<div class="col-8 d-block" style="padding: 0px;">
-						<p><b>3 cargadores frontales</b></p>
+						<p><b>{{$offert->title}}</b></p>
 						<p>Lorem ipsum dolor sit amet, consectetur.</p>
 					</div>
 					<div class="col-4">
@@ -42,31 +42,7 @@
 				<hr>
 
 				<div>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas doloremque eaque eos, aliquam, inventore suscipit. Non veniam ad unde nulla temporibus? Vitae quisquam maxime dignissimos adipisci repellat, rem commodi ea.</p>
-				</div>
-
-				<div>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas doloremque eaque eos, aliquam, inventore suscipit. Non veniam ad unde nulla temporibus? Vitae quisquam maxime dignissimos adipisci repellat, rem commodi ea.</p>
-				</div>
-
-				<div>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas doloremque eaque eos, aliquam, inventore suscipit. Non veniam ad unde nulla temporibus? Vitae quisquam maxime dignissimos adipisci repellat, rem commodi ea.</p>
-				</div>
-
-				<div>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas doloremque eaque eos, aliquam, inventore suscipit. Non veniam ad unde nulla temporibus? Vitae quisquam maxime dignissimos adipisci repellat, rem commodi ea.</p>
-				</div>
-
-				<div>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas doloremque eaque eos, aliquam, inventore suscipit. Non veniam ad unde nulla temporibus? Vitae quisquam maxime dignissimos adipisci repellat, rem commodi ea.</p>
-				</div>
-
-				<div>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas doloremque eaque eos, aliquam, inventore suscipit. Non veniam ad unde nulla temporibus? Vitae quisquam maxime dignissimos adipisci repellat, rem commodi ea.</p>
-				</div>
-
-				<div>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas doloremque eaque eos, aliquam, inventore suscipit. Non veniam ad unde nulla temporibus? Vitae quisquam maxime dignissimos adipisci repellat, rem commodi ea.</p>
+					<p>{{$offert->description}}</p>
 				</div>
 
 			</div>
@@ -130,42 +106,15 @@
 				<p>Lorem ipsum dolor sit amet, consectetur adipisicing.</p>
 			</div>
 			<div class="col-sm-12">
+
+				@foreach(\App\Location::orderBy('department')->pluck('department', 'id') as $id => $department)
 				<div class="col-sm-3 float-right link-parent">
-					<a href="#">Lima</a>
-				</div>
-				<div class="col-sm-3 float-right link-parent">
-					<a href="#">Lima</a>
-				</div>
-				<div class="col-sm-3 float-right link-parent">
-					<a href="#">Lima</a>
-				</div>
-				<div class="col-sm-3 float-right link-parent">
-					<a href="#">Lima</a>
-				</div>
-				<div class="col-sm-3 float-right link-parent">
-					<a href="#">Lima</a>
-				</div>
-				<div class="col-sm-3 float-right link-parent">
-					<a href="#">Lima</a>
-				</div>
-				<div class="col-sm-3 float-right link-parent">
-					<a href="#">Lima</a>
-				</div>
-				<div class="col-sm-3 float-right link-parent">
-					<a href="#">Lima</a>
-				</div>
-				<div class="col-sm-3 float-right link-parent">
-					<a href="#">Lima</a>
-				</div>
-				<div class="col-sm-3 float-right link-parent">
-					<a href="#">Lima</a>
-				</div>
-				<div class="col-sm-3 float-right link-parent">
-					<a href="#">Lima</a>
-				</div>
-				<div class="col-sm-3 float-right link-parent">
-					<a href="#">Lima</a>
-				</div>
+                    <a href="{{route('offert.location', str_slug($department, '-'))}}">
+                    	{{$department}}
+                    </a>
+                </div>
+                @endforeach
+				
 			</div>
 		</div>
 	</div>
@@ -178,5 +127,14 @@
 @endsection
 
 @push('scripts')
+
+<script>
+	jQuery(document).ready(function() {
+		$(".main-card").on("click", function(){
+			var url = $(this).attr("route");
+			window.open(url);
+		})
+	})
+</script>
 
 @endpush
