@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Helper;
+use App\Http\Requests\EmailRequest;
 use App\Location;
+use App\Mail\NewPostulation;
 use App\Offert;
+use App\Postulation;
 use Illuminate\Http\Request;
 
 class OffertController extends Controller
@@ -70,7 +74,7 @@ class OffertController extends Controller
     {
         $offert->load([
             'company' => function ($q) {
-                $q->select('id', 'user_id', 'title', 'website', 'biography');
+                $q->select('id', 'user_id', 'title', 'website', 'biography', 'slug');
             },
             'company.user'
         ])->get();
@@ -112,5 +116,17 @@ class OffertController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function mail(Offert $offert, EmailRequest $request)
+    {
+        $cv = Helper::uploadFile('file', 'files');
+        $request->merge(['cv' => $cv]);
+        $request->merge(['offert_id' => $offert['id']]);
+        Postulation::create($request->input());
+
+        \Mail::to('sistem@mail.com')->send(new NewPostulation($offert, $request));
+
+        return back()->with('status', 'Has postulado correctamente');
     }
 }

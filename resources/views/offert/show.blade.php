@@ -50,18 +50,35 @@
 			<div class="col-sm-5">
 				<div class="contact fixed-top">
 					<h3>Postula</h3>
-					<form class="pb-4">
+					<form class="pb-4" action="{{route('offert.mail', $offert->slug)}}" method="POST" enctype="multipart/form-data" novalidate>
+						@csrf
 						<div class="form-group">
-							<label for="exampleInputEmail1">Email</label>
-							<input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Correo electrónico">
+							<label for="email">Email</label>
+							<input type="email" class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}" id="email"  placeholder="Correo electrónico" value="{{old('email')}}" name="email" required>
+
+							@if ($errors->has('email'))
+                                <span class="invalid-feedback">
+                                    <strong>{{ $errors->first('email') }}</strong>
+                                </span>
+                            @endif
 						</div>
 						<div class="form-group">
-							<label for="exampleInputPassword1">Teléfono</label>
-							<input type="text" class="form-control" id="exampleInputPassword1" placeholder="Teléfono">
+							<label for="phone">Teléfono</label>
+							<input type="text" class="form-control {{ $errors->has('phone') ? 'is-invalid' : '' }}" id="phone" placeholder="Teléfono" value="{{old('phone')}}" name="phone" required>
+							@if ($errors->has('phone'))
+                                <span class="invalid-feedback">
+                                    <strong>{{ $errors->first('phone') }}</strong>
+                                </span>
+                            @endif
 						</div>
 						<div class="custom-file">
-							<input type="file" class="custom-file-input" id="customFileLang" lang="es">
-							<label class="custom-file-label" for="customFileLang">Adjuntar CV</label>
+							<input type="file" class="custom-file-input {{ $errors->has('file') ? 'is-invalid' : '' }}" id="file" lang="es" name="file" required>
+							<label class="custom-file-label" for="file">Adjuntar CV (pdf)</label>
+							@if ($errors->has('file'))
+                                <span class="invalid-feedback">
+                                    <strong>{{ $errors->first('file') }}</strong>
+                                </span>
+                            @endif
 						</div>
 						<br><br>
 						<div class="text-right">

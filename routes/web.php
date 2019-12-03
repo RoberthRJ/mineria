@@ -33,6 +33,8 @@ Route::prefix('offert')->group(function () {
 
 	Route::get('/{offert}', 'OffertController@show')->name('offert.show');
 
+	Route::post('/{offert}', 'OffertController@mail')->name('offert.mail');
+
 });
 
 
