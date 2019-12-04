@@ -4,6 +4,7 @@
 
 use App\Service;
 use Faker\Generator as Faker;
+use Faker\Provider\Image;
 
 $factory->define(Service::class, function (Faker $faker) {
 	$title = $faker->sentence;
@@ -13,6 +14,7 @@ $factory->define(Service::class, function (Faker $faker) {
         'location_id' => App\Location::all()->random()->id,
         'title' => $title,
         'description' => $faker->paragraph,
-        'slug' => str_slug($title, '-')
+        'slug' => str_slug($title, '-'),
+        'picture' => Image::image(storage_path().'/app/public/services', 200, 200,'people', false),
     ];
 });

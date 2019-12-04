@@ -28,6 +28,7 @@ class CreateServicesTable extends Migration
             $table->enum('status', [Service::PUBLISHED, Service::PENDING, Service::REJECTED])->default(Service::PENDING);
             $table->boolean('previous_approved')->default(false);
             $table->boolean('previous_rejected')->default(false);
+            $table->string('picture');
             $table->timestamps();
             $table->softDeletes();
         });

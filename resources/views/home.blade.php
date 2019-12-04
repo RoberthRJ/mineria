@@ -13,17 +13,17 @@
             <div class="col-sm-7">
                 <div class="banner-text">
                     <h1>Agenda Minera Perú</h1>
-                    <p>Conecta con cientos de serviciis mineros a nivel nacional, encuentra al más cercano a tu zona.</p>
+                    <p>Conecta con cientos de servicios mineros a nivel nacional, encuentra al más cercano a tu zona.</p>
                 </div>
-                <form method="POST" action="{{route('offert.list')}}">
+                <form method="POST" action="{{route('service.redirect')}}" novalidate>
                     @csrf
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Ubicación" name="location" id="location">
-                        <select class="custom-select" id="category_id" name="category_id">
-                            <option value="">Categoría</option>
-                            @foreach(\App\Category::orderBy('category')->pluck('category', 'id') as $id => $category)
-                                <option {{ (int) old('category_id') === $id ? 'selected' : '' }} value="{{$id}}">
-                                    {{$category}}
+                        <input type="text" class="form-control" placeholder="¿Qué servicio buscas?" name="word" id="word">
+                        <select class="custom-select" id="location_id" name="location_id">
+                            <option value="">Lugar</option>
+                            @foreach(\App\Location::orderBy('department')->pluck('department', 'id') as $id => $department)
+                                <option {{ (int) old('department_id') === $id ? 'selected' : '' }} value="{{$id}}">
+                                    {{$department}}
                                 </option>
                             @endforeach
                         </select>
@@ -60,7 +60,7 @@
                         </div>
                     </div>
                 </a>
-                <a href="#">
+                <a href="{{route('offert.index')}}">
                     <div class="custom-card d-flex" style="height: 5rem">
                         <img src="assets/images/card/card-3.jpg" alt="" class="img-fluid">
                         <div class="card-text">
@@ -111,5 +111,14 @@
 
 
 @push('scripts')
+
+<script>
+    jQuery(document).ready(function() {
+        $(".main-card").on("click", function(){
+            var url = $(this).attr("route");
+            window.open(url);
+        })
+    })
+</script>
 
 @endpush

@@ -8,37 +8,34 @@
 	<div class="input-group mb-3 search">
 		<div class="input-group-prepend inputs">
 			<span class="input-group-text" id="basic-addon1"><i class="fa fa-search"></i></span>
-			<input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+			<input type="text" class="form-control" placeholder="Busca servicios">
 		</div>
 	</div>
 	<div class="collapse navbar-collapse" id="navbarSupportedContent">
 		<ul class="navbar-nav ml-auto">
-			<li class="nav-item active">
-				<a class="nav-link" href="#">S/. PEN<span class="sr-only">(current)</span></a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="#">Encuentra servicios</a>
+			<li class="nav-item dropdown">
+				<a class="nav-link" href="#">Oferta tus servicios</a>
 			</li>
 			<li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					Oferta tus servicios
+					Bolsa de trabajo
 				</a>
 				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-					<a class="dropdown-item" href="#">Action</a>
-					<a class="dropdown-item" href="#">Another action</a>
+					<a class="dropdown-item" href="{{route('offert.index')}}">Postulante</a>
+					<!-- <a class="dropdown-item" href="#">Postulante</a> -->
 					<div class="dropdown-divider"></div>
-					<a class="dropdown-item" href="#">Something else here</a>
+					<a class="dropdown-item" href="#">Empresa</a>
 				</div>
 			</li>
-			<li class="nav-item">
+			<!-- <li class="nav-item">
 				<a class="nav-link" href="#">Ayuda</a>
-			</li>
-			<li class="nav-item">
+			</li> -->
+			<!-- <li class="nav-item">
 				<a class="nav-link" href="#">Ingresa</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link btn-register" href="#">Registrate</a>
-			</li>
+			</li> -->
 		</ul>
 	</div>
 </nav>

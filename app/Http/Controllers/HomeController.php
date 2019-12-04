@@ -28,7 +28,9 @@ class HomeController extends Controller
                                 ->take(8)
                                 ->inRandomOrder()
                                 ->get();
+
+        $nav = 1;
         // dd($services);
-        return view('home', compact('services'));
+        return view('home', compact('services', 'nav'));
     }
 }

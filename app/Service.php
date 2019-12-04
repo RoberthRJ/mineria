@@ -4,6 +4,7 @@ namespace App;
 
 use App\Company;
 use App\Consumer;
+use App\Service;
 use Illuminate\Database\Eloquent\Model;
 
 class Service extends Model
@@ -33,5 +34,14 @@ class Service extends Model
 
     public function getRouteKeyName() {
         return 'slug';
+    }
+
+    public function relatedServices () {
+        return Service::with('company', 'location')
+            ->whereCategoryId($this->category_id)
+            ->where('id', '!=', $this->id)
+            ->latest()
+            ->limit(6)
+            ->get();
     }
 }

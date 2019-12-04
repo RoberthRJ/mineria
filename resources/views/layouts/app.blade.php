@@ -30,8 +30,16 @@
 </head>
 <body>
     <div id="app">
+
+        @if(Route::currentRouteName() == "home.index")
         
         @include('shared.navigation')
+
+        @else
+
+        @include('shared.navigation-2')
+
+        @endif
 
         @yield('content')
     </div>

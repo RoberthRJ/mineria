@@ -27,12 +27,12 @@
 			<!-- <li class="nav-item">
 				<a class="nav-link" href="#">Ayuda</a>
 			</li> -->
-			<li class="nav-item">
+			<!-- <li class="nav-item">
 				<a class="nav-link" href="#">Ingresa</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link btn-register" href="#">Registrate</a>
-			</li>
+			</li> -->
 		</ul>
 	</div>
 </nav>

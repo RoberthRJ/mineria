@@ -30,12 +30,12 @@ class OffertController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function list(Request $request){
-        // dd($request['category_id']);
-        $offerts = Offert::where('category_id', $request['category_id'])->where('company_id', $request['location'])
-                            ->paginate(12);
+    public function search(Request $request){
 
-        dd($offerts);
+        $offerts = Offert::where('category_id', $request['category_id'])
+                            ->where('description', 'like', '%'.$request['word'].'%')
+                            ->orWhere('title', 'like', '%'.$request['word'].'%')
+                            ->paginate(12);
 
         return view('offert.index', compact('offerts'));
     }

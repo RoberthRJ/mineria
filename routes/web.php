@@ -37,9 +37,37 @@ Route::prefix('offert')->group(function () {
 
 });
 
+Route::prefix('service')->group(function () {
+
+	Route::get('/', 'ServiceController@index')->name('service.index');
+
+	Route::get('/{service}', 'ServiceController@show')->name('service.show');
+	
+});
+
+Route::prefix('search')->group(function () {
+
+	Route::post('/', 'ServiceController@redirect')->name('service.redirect');
+
+	Route::get('/{word}/{location}', 'ServiceController@search')->name('service.search');
+	
+});
+
 
 Route::prefix('company')->group(function () {
 
 	Route::post('/{company}', 'CompanyController@mail')->name('company.mail');
+	
+});
+
+Route::prefix('admin')->group(function () {
+
+	Route::group(['middleware' => ['auth']], function(){
+
+		Route::get('/', 'AdminController@index')->name('admin.index');
+
+		// Route::get('/', 'OffertController@store')->name('offert.store')
+		// 	->middleware([sprintf("role:%s", \App\Role::ADMIN)]);
+	});
 	
 });
