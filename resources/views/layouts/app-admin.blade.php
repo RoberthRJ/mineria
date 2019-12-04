@@ -34,7 +34,31 @@
 <body>
     <div id="app">
 
-        @yield('content')
+        <div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
+
+            @include('admin.components.header')
+
+            @include('admin.components.options')
+
+            <div class="app-main">
+
+                @include('admin.components.sidebar')   
+
+                <div class="app-main__outer">
+
+                    <div class="app-main__inner">
+
+                        @yield('content')
+
+                    </div>
+
+                    @include('admin.components.footer') 
+
+                </div>  
+
+            </div>
+
+        </div>
         
     </div>
     

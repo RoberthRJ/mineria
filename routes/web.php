@@ -65,9 +65,21 @@ Route::prefix('admin')->group(function () {
 	Route::group(['middleware' => ['auth']], function(){
 
 		Route::get('/', 'AdminController@index')->name('admin.index');
-
 		// Route::get('/', 'OffertController@store')->name('offert.store')
 		// 	->middleware([sprintf("role:%s", \App\Role::ADMIN)]);
+
+
+		Route::prefix('offert')->group(function () {
+
+			Route::get('/', 'AdminController@index')->name('admin.index');
+
+			Route::get('/create', 'AdminController@create')->name('admin.offert.create');
+
+			Route::post('/create', 'AdminController@store')->name('admin.offert.store');
+
+		});
+
+		
 	});
 	
 });
