@@ -23,13 +23,12 @@ class CreateUsersTable extends Migration
 
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('role_id')->default(Role::PROFFESIONAL);
+            $table->unsignedInteger('role_id')->default(Role::CANDIDATE);
             $table->foreign('role_id')->references('id')->on('roles');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
             $table->string('picture')->nullable();
-            $table->string('phone')->nullable();
 
             //Cashier columns
             $table->string('stripe_id')->nullable();

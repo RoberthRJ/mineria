@@ -7,11 +7,13 @@ use Faker\Generator as Faker;
 
 $factory->define(Company::class, function (Faker $faker) {
 	$title = $faker->word;
+	$links = '';
     return [
         'user_id' => App\User::all()->random()->id,
         'title' => $title,
         'biography' => $faker->sentence,
-        'website' => $faker->url,
+        'links' => $links,
+        'address' => $faker->address,
         'slug' => str_slug($title, '-')
     ];
 });

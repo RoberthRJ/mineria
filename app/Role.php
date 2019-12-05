@@ -10,6 +10,6 @@ class Role extends Model
     protected $guarded = ['id'];
 
     const ADMIN = 1;
-    const COMPANY = 2;
-    const PROFFESIONAL = 3;
+    const CANDIDATE = 2;
+    const COMPANY = 3;
 }

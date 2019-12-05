@@ -21,9 +21,8 @@ $factory->define(User::class, function (Faker $faker) {
     return [
         'role_id' => App\Role::all()->random()->id,
         'email' => $faker->unique()->safeEmail,
-        'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+        'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
         'remember_token' => Str::random(10),
         'picture' => Image::image(storage_path().'/app/public/users', 200, 200,'business', false),
-        'phone' => $faker->phoneNumber,
     ];
 });

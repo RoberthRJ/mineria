@@ -46,14 +46,30 @@
                 <li>
                     <a href="#">
                             <i class="metismenu-icon pe-7s-diamond"></i>
-                            Elements
+                            Ofertas
                             <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
                         </a>
                         <ul>
                             <li>
                                 <a href="{{route('admin.offert.create')}}">
                                     <i class="metismenu-icon"></i>
-                                    Crear ofertas
+                                    Crear oferta
+                                </a>
+                            </li>
+                        </ul>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                            <i class="metismenu-icon pe-7s-diamond"></i>
+                            Empresas
+                            <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+                        </a>
+                        <ul>
+                            <li>
+                                <a href="{{route('admin.company.create')}}">
+                                    <i class="metismenu-icon"></i>
+                                    Crear empresa
                                 </a>
                             </li>
                         </ul>

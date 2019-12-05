@@ -68,14 +68,23 @@ Route::prefix('admin')->group(function () {
 		// Route::get('/', 'OffertController@store')->name('offert.store')
 		// 	->middleware([sprintf("role:%s", \App\Role::ADMIN)]);
 
+		Route::get('/', 'AdminController@index')->name('admin.index');
+
 
 		Route::prefix('offert')->group(function () {
 
-			Route::get('/', 'AdminController@index')->name('admin.index');
+			Route::get('/create', 'AdminController@offertCreate')->name('admin.offert.create');
 
-			Route::get('/create', 'AdminController@create')->name('admin.offert.create');
+			Route::post('/create', 'AdminController@offertStore')->name('admin.offert.store');
 
-			Route::post('/create', 'AdminController@store')->name('admin.offert.store');
+		});
+
+
+		Route::prefix('company')->group(function () {
+
+			Route::get('/create', 'AdminController@companyCreate')->name('admin.company.create');
+
+			Route::post('/create', 'AdminController@companyStore')->name('admin.company.store');
 
 		});
 
