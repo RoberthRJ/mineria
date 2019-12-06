@@ -23,6 +23,10 @@ class CreateCandidatesTable extends Migration
             $table->text('biography')->nullable();
             $table->string('slug')->nullable();
             $table->string('address')->nullable();
+            $table->unsignedInteger('department_id')->nullable();
+            $table->foreign('department_id')->references('id')->on('departments');
+            $table->unsignedInteger('province_id')->nullable();
+            $table->foreign('province_id')->references('id')->on('provinces');
             $table->string('phone')->nullable();
             $table->string('skills')->nullable();
             $table->string('languages')->nullable();

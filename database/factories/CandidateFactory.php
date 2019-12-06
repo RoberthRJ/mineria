@@ -20,6 +20,8 @@ $factory->define(Candidate::class, function (Faker $faker) {
         'phone' => $faker->phoneNumber,
         'languajes' => $languajes,
         'skills' => $skills,
-        'slug' => str_slug($name." ".$last_name, '-')
+        'slug' => str_slug($name." ".$last_name, '-'),
+        'department_id' => App\Department::all()->random()->id,
+        'province_id' => App\Province::all()->random()->id
     ];
 });

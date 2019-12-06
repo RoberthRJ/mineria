@@ -58,6 +58,15 @@ Route::group(['middleware' => ['auth']], function(){
 		return view('partials.dashboard.index', compact('word'));
 
 	})->name('dashboard.index');
+
+
+	Route::prefix('candidate')->group(function () {
+
+		Route::post('/profile/{candidate}', 'CandidateController@updateProfile')->name('update.candidate.profile')->middleware([sprintf("role:%s", \App\Role::CANDIDATE)]);
+		
+	});
+
+	Route::get('/{job}/apply', 'CandidateController@apply')->name('candidate.apply')->middleware([sprintf("role:%s", \App\Role::CANDIDATE)]);	
 		
 });
 

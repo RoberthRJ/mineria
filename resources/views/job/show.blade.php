@@ -90,7 +90,7 @@
        <div class="col-md-4 col-lg-3">
           <div class="single-candidate-bottom-right">
              <div class="single-candidate-widget-2">
-                <a href="#" class="jobguru-btn-2">
+                <a href="{{route('candidate.apply', $job->slug)}}" class="jobguru-btn-2">
                 <i class="fa fa-paper-plane-o"></i>
                 Aplicar ahora
                 </a>

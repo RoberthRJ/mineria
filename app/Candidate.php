@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Job;
 use Illuminate\Database\Eloquent\Model;
 
 class Candidate extends Model
@@ -10,10 +11,14 @@ class Candidate extends Model
     protected $guarded = ['id'];
 
     protected $fillable = [
-        'user_id', 'name'
+        'user_id', 'name', 'last_name', 'proffesional_title', 'biography', 'slug', 'address', 'department_id', 'province_id', 'phone', 'skills', 'languages'
     ];
 
     public function user () {
 		return $this->belongsTo(User::class);
+	}
+
+	public function jobs () {
+		return $this->belongsToMany(Job::class);
 	}
 }

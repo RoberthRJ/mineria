@@ -35,7 +35,7 @@ class Job extends Model
 		return $this->belongsTo(Company::class);
 	}
 
-	public function proffesional () {
+	public function candidates () {
     	return $this->belongsToMany(Candidate::class);
     }
 
