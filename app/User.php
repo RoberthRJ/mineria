@@ -2,8 +2,8 @@
 
 namespace App;
 
+use App\Candidate;
 use App\Company;
-use App\Proffesional;
 use App\Role;
 use App\UserSocialAccount;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -58,8 +58,8 @@ class User extends Authenticatable
         return $this->hasOne(Company::class);
     }
 
-    public function proffesional () {
-        return $this->hasOne(Proffesional::class);
+    public function candidate () {
+        return $this->hasOne(Candidate::class);
     }
 
     public function socialAccount () {

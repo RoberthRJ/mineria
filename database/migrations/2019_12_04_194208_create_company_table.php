@@ -13,17 +13,19 @@ class CreateCompanyTable extends Migration
      */
     public function up()
     {
-        Schema::create('company', function (Blueprint $table) {
+        Schema::create('companies', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('title')->nullable();
             $table->text('biography')->nullable();
             $table->string('links')->nullable();
+            $table->string('address');
             $table->string('slug')->nullable();
             $table->unsignedInteger('sector_id');
             $table->foreign('sector_id')->references('id')->on('sectors');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -34,6 +36,6 @@ class CreateCompanyTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('company');
+        Schema::dropIfExists('companies');
     }
 }

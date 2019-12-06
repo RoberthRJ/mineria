@@ -23,35 +23,11 @@ Route::get('/images/{path}/{attachment}', function($path, $attachment) {
 
 Route::get('/', 'HomeController@index')->name('home.index');
 
-Route::prefix('offert')->group(function () {
+/*----------  search  ----------*/
 
-	Route::get('/', 'OffertController@index')->name('offert.index');
+Route::get('/search/{word}', 'JobController@list')->name('job.list');
 
-	Route::get('/d/{location}', 'OffertController@location')->name('offert.location');
-
-	Route::post('/', 'OffertController@list')->name('offert.list');
-
-	Route::get('/{offert}', 'OffertController@show')->name('offert.show');
-
-	Route::post('/{offert}', 'OffertController@mail')->name('offert.mail');
-
-});
-
-Route::prefix('service')->group(function () {
-
-	Route::get('/', 'ServiceController@index')->name('service.index');
-
-	Route::get('/{service}', 'ServiceController@show')->name('service.show');
-	
-});
-
-Route::prefix('search')->group(function () {
-
-	Route::post('/', 'ServiceController@redirect')->name('service.redirect');
-
-	Route::get('/{word}/{location}', 'ServiceController@search')->name('service.search');
-	
-});
+/*----------  end search  ----------*/
 
 
 Route::prefix('company')->group(function () {
@@ -59,6 +35,46 @@ Route::prefix('company')->group(function () {
 	Route::post('/{company}', 'CompanyController@mail')->name('company.mail');
 	
 });
+
+Route::prefix('job')->group(function () {
+
+	Route::get('/free-post', function(){
+
+		return view('job.free-post');
+
+	})->name('job.freePost');
+
+	Route::get('/{job}', 'JobController@show')->name('job.show');
+	
+});
+
+
+
+
+Route::group(['middleware' => ['auth']], function(){
+
+	Route::get('/dashboard/{word?}', function($word = 'dashboard'){
+
+		return view('partials.dashboard.index', compact('word'));
+
+	})->name('dashboard.index');
+		
+});
+
+// Route::prefix('candidate')->group(function () {
+
+// 	Route::get('/dashboard', function(){
+
+// 		return view('candidate.dashboard');
+
+// 	})->name('candidate.dashboard');
+	
+// })->middleware([sprintf("role:%s", \App\Role::CANDIDATE)]);	
+	
+
+
+
+
 
 Route::prefix('admin')->group(function () {
 

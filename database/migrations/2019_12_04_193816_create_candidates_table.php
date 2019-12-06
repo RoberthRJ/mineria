@@ -18,15 +18,16 @@ class CreateCandidatesTable extends Migration
             $table->unsignedInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('name');
-            $table->string('last_name');
-            $table->string('professional_title');
-            $table->text('bigraphy');
-            $table->string('slug');
-            $table->string('address');
-            $table->integer('phone');
-            $table->string('skills');
-            $table->string('languajes');
+            $table->string('last_name')->nullable();
+            $table->string('professional_title')->nullable();
+            $table->text('biography')->nullable();
+            $table->string('slug')->nullable();
+            $table->string('address')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('skills')->nullable();
+            $table->string('languages')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

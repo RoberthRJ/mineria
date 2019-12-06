@@ -9,16 +9,33 @@
 
     <title>{{ config('app.name', 'Agenda Minera Perú') }}</title>
 
-    <!-- <link rel="stylesheet" href="styles/css/styles.css"> -->
-
-    <!-- Font Awesome -->
-    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Muli:400,500,600,700,800,900|PT+Serif:400,700&display=swap" rel="stylesheet">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="{{asset('assets/img/favicon/favicon-32x32.png')}}">
+    <!--Bootstrap css-->
+    <link rel="stylesheet" href="{{asset('assets/css/bootstrap.css')}}">
+    <!--Font Awesome css-->
+    <link rel="stylesheet" href="{{asset('assets/css/font-awesome.min.css')}}">
+    <!--Magnific css-->
+    <link rel="stylesheet" href="{{asset('assets/css/magnific-popup.css')}}">
+    <!--Owl-Carousel css-->
+    <link rel="stylesheet" href="{{asset('assets/css/owl.carousel.min.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/owl.theme.default.min.css')}}">
+    <!--Animate css-->
+    <link rel="stylesheet" href="{{asset('assets/css/animate.min.css')}}">
+    <!--Select2 css-->
+    <link rel="stylesheet" href="{{asset('assets/css/select2.min.css')}}">
+    <!--Slicknav css-->
+    <link rel="stylesheet" href="{{asset('assets/css/slicknav.min.css')}}">
+    <!--Bootstrap-Datepicker css-->
+    <link rel="stylesheet" href="{{asset('assets/css/bootstrap-datepicker.min.css')}}">
+    <!--Jquery UI css-->
+    <link rel="stylesheet" href="{{asset('assets/css/jquery-ui.min.css')}}">
+    <!--Perfect-Scrollbar css-->
+    <link rel="stylesheet" href="{{asset('assets/css/perfect-scrollbar.min.css')}}">
+    <!--Site Main Style css-->
+    <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
+    <!--Responsive css-->
+    <link rel="stylesheet" href="{{asset('assets/css/responsive.css')}}">
 
     @stack('styles')
 
@@ -31,27 +48,39 @@
 <body>
     <div id="app">
 
-        @if(Route::currentRouteName() == "home.index")
-        
-        @include('shared.navigation')
-
-        @else
-
-        @include('shared.navigation-2')
-
-        @endif
+        @include('partials.shared.header')
 
         @yield('content')
+
+        @include('partials.shared.footer')
+
     </div>
     
-    <!-- Jquery -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-
-    <!-- Popper -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-
-    <!-- Bootstrap-->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <!--Jquery js-->
+    <script src="{{asset('assets/js/jquery-3.0.0.min.js')}}"></script>
+    <!--Popper js-->
+    <script src="{{asset('assets/js/popper.min.js')}}"></script>
+    <!--Bootstrap js-->
+    <script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
+    <!--Bootstrap Datepicker js-->
+    <script src="{{asset('assets/js/bootstrap-datepicker.min.js')}}"></script>
+    <!--Perfect Scrollbar js-->
+    <script src="{{asset('assets/js/jquery-perfect-scrollbar.min.js')}}"></script>
+    <!--Owl-Carousel js-->
+    <script src="{{asset('assets/js/owl.carousel.min.js')}}"></script>
+    <!--SlickNav js-->
+    <script src="{{asset('assets/js/jquery.slicknav.min.js')}}"></script>
+    <!--Magnific js-->
+    <script src="{{asset('assets/js/jquery.magnific-popup.min.js')}}"></script>
+    <!--Select2 js-->
+    <script src="{{asset('assets/js/select2.min.js')}}"></script>
+    <!--jquery-ui js-->
+    <script src="{{asset('assets/js/jquery-ui.min.js')}}"></script>
+    <!--Jarallax js-->
+    <script src="{{asset('assets/js/jarallax.min.js')}}"></script>
+    <script src="{{asset('assets/js/jarallax-video.min.js')}}"></script>
+    <!--Main js-->
+    <script src="{{asset('assets/js/main.js')}}"></script>
 
     @stack('scripts')
 </body>

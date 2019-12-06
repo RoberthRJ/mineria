@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Service;
+use App\Category;
+use App\Company;
+use App\Job;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -24,13 +26,16 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $services = Service::with('company', 'location')
-                                ->take(8)
-                                ->inRandomOrder()
-                                ->get();
+        // $services = Service::with('company', 'location')
+        //                         ->take(8)
+        //                         ->inRandomOrder()
+        //                         ->get();
+        $categories = Category::take(8)->get();
 
-        $nav = 1;
-        // dd($services);
-        return view('home', compact('services', 'nav'));
+        $jobs = Job::with('company')->take(4)->get();
+
+        $companies = Company::take(4)->get();
+
+        return view('home', compact('categories', 'jobs', 'companies'));
     }
 }

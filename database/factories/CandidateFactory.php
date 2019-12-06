@@ -8,16 +8,8 @@ use Faker\Generator as Faker;
 $factory->define(Candidate::class, function (Faker $faker) {
     $name = $faker->name;
 	$last_name = $faker->lastName;
-	$skills = '{
-                    "skill_1" : "'.App\Skill::all()->unique()->random()->id.'",
-                    "skill_2" : "'.App\Skill::all()->unique()->random()->id.'",
-                    "skill_3" : "'.App\Skill::all()->unique()->random()->id.'",
-                    "skill_4" : "'.App\Skill::all()->unique()->random()->id.'",
-                }';
-	$languajes = '{
-                    "lang_1" : "'.App\Language::all()->unique()->random()->id.'",
-                    "lang_2" : "'.App\Language::all()->unique()->random()->id.'",
-                }';
+	$skills = '{"skill_1" : "'.App\Skill::all()->unique()->random()->id.'","skill_2" : "'.App\Skill::all()->unique()->random()->id.'","skill_3" : "'.App\Skill::all()->unique()->random()->id.'","skill_4" : "'.App\Skill::all()->unique()->random()->id.'"}';
+	$languajes = '{"lang_1" : "'.App\Language::all()->unique()->random()->id.'","lang_2" : "'.App\Language::all()->unique()->random()->id.'"}';
     return [
         'user_id' => App\User::all()->random()->id,
         'name' => $name,

@@ -23,6 +23,7 @@ class CreateEducationTable extends Migration
             $table->string('institution');
             $table->text('additional_information');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

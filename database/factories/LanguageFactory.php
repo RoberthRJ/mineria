@@ -7,6 +7,6 @@ use Faker\Generator as Faker;
 
 $factory->define(Language::class, function (Faker $faker) {
     return [
-        'languaje' => $faker->word
+        'language' => $faker->word
     ];
 });

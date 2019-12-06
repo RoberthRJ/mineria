@@ -12,9 +12,10 @@ class JobController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+
+    public function list()
     {
-        //
+        return view('job.list');
     }
 
     /**
@@ -46,7 +47,23 @@ class JobController extends Controller
      */
     public function show(Job $job)
     {
-        //
+        $job->load([
+            'company' => function ($q) {
+                $q->select('id', 'user_id', 'title', 'links', 'biography', 'slug');
+            },
+            'province' => function ($q) {
+                $q->select('id', 'department_id', 'province');
+            },
+            'province.department',
+            'company.user',
+            'jobType'
+        ])->get();
+
+        $related = $job->relatedJobs();
+
+        // dd($job);
+
+        return view('job.show', compact('job', 'related'));
     }
 
     /**

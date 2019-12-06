@@ -23,6 +23,7 @@ class CreateWorkExperiencesTable extends Migration
             $table->string('company');
             $table->text('additional_information');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
