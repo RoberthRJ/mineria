@@ -41,8 +41,12 @@
              </div>
              <!-- end job head -->
              <div class="job-sidebar-list-single">
+
+              @foreach($jobs as $job)
                 
-				@include('job.list-card')
+				      @include('job.list-card')
+
+              @endforeach
 
              </div>
              <!-- end job sidebar list -->
@@ -57,6 +61,7 @@
                    <li><a href="#"><i class="fa fa-angle-double-right"></i></a></li>
                 </ul>
              </div>
+             {{ $jobs->links() }}
              <!-- end pagination -->
           </div>
        </div>

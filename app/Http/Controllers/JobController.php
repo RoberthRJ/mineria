@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Job;
 use Illuminate\Http\Request;
 
@@ -13,38 +14,12 @@ class JobController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function list()
+    public function index()
     {
-        return view('job.list');
+        $jobs = Job::orderBy('created_at')->paginate(10);
+        return view('job.list', compact('jobs'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Job  $job
-     * @return \Illuminate\Http\Response
-     */
     public function show(Job $job)
     {
         $job->load([
@@ -61,42 +36,12 @@ class JobController extends Controller
 
         $related = $job->relatedJobs();
 
-        // dd($job);
-
         return view('job.show', compact('job', 'related'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Job  $job
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Job $job)
+    public function categories()
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Job  $job
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Job $job)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Job  $job
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Job $job)
-    {
-        //
+        $categories = Category::with('subcategories')->get();
+        return view('category.index', compact('categories'));
     }
 }

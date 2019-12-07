@@ -7,14 +7,14 @@
          </a>
       </div>
       <div class="company-list-details">
-         <h3><a href="#">civil engineer</a></h3>
+         <h3><a href="#">{{$job->title}}</a></h3>
          <p class="company-state"><i class="fa fa-map-marker"></i> Chicago, Michigan</p>
          <p class="open-icon"><i class="fa fa-clock-o"></i>2 minutes ago</p>
          <p class="varify"><i class="fa fa-check"></i>Fixed price : $800-$1200</p>
          <p class="rating-company">4.2</p>
       </div>
       <div class="company-list-btn">
-         <a href="#" class="jobguru-btn">bid now</a>
+         <a href="#" class="jobguru-btn">Ver oferta</a>
       </div>
    </div>
 </div>

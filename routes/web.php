@@ -25,7 +25,22 @@ Route::get('/', 'HomeController@index')->name('home.index');
 
 /*----------  search  ----------*/
 
-Route::get('/search/{word}', 'JobController@list')->name('job.list');
+Route::get('/jobs', 'JobController@index')->name('job.index');
+
+Route::get('/jobs/{word}', 'JobController@word')->name('job.word');
+
+Route::get('/jobs/category/{category}', 'JobController@list')->name('job.list');
+
+Route::get('/jobs/subcategory/{subcategory}', 'JobController@list')->name('job.list');
+
+Route::get('/{department}/jobs', 'JobController@list')->name('job.list');
+
+Route::get('/{department}/jobs/category/{category}', 'JobController@list')->name('job.list');
+
+Route::get('/{department}/jobs/subcategory/{subcategory}', 'JobController@list')->name('job.list');
+Route::get('/{department}/{province}', 'JobController@list')->name('job.list');
+
+Route::get('/categories', 'JobController@categories')->name('category.index');
 
 /*----------  end search  ----------*/
 

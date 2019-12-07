@@ -14,13 +14,13 @@
             <div class="row">
                <div class="col-md-12 col-sm-12 content-home">
                   <div class="banner-welcome">
-                     <h4>Over <span>100,000+</span> jobs are waiting for you</h4>
+                     <h4><span>trabajos en minería</span> en todo el Perú</h4>
                      <form>
                         <div class="video-banner-input">
-                           <input type="text" placeholder="Job Title, Keywords, or Phrase">
+                           <input type="text" placeholder="Titulo, palabra o frase">
                         </div>
                         <div class="video-banner-input">
-                           <input type="text" placeholder="City, State or ZIP">
+                           <input type="text" placeholder="Ciudad o departamento">
                         </div>
                         <div class="video-banner-input">
                            <button type="submit"><i class="fa fa-search"></i></button>
@@ -48,7 +48,7 @@
       <div class="row">
          <div class="col-md-12">
             <div class="site-heading">
-               <h2>top Trending <span>Categories</span></h2>
+               <h2><span>Categorías </span>más demandadas</h2>
                <p>A better career is out there. We'll help you find it. We're your first step to becoming everything you want to be.</p>
             </div>
          </div>
@@ -96,7 +96,7 @@
       <div class="row">
          <div class="col-md-12">
             <div class="load-more">
-               <a href="#" class="jobguru-btn">browse all categories</a>
+               <a href="{{route('category.index')}}" class="jobguru-btn">Todas las categorías</a>
             </div>
          </div>
       </div>

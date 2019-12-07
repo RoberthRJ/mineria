@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Offert;
+use App\Subcategory;
 use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
@@ -12,5 +13,9 @@ class Category extends Model
 
     public function offerts () {
 		return $this->hasMany(Offert::class);
+	}
+
+	public function subcategories () {
+		return $this->hasMany(Subcategory::class);
 	}
 }
