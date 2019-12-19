@@ -26,15 +26,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        // $services = Service::with('company', 'location')
-        //                         ->take(8)
-        //                         ->inRandomOrder()
-        //                         ->get();
         $categories = Category::take(8)->get();
-
         $jobs = Job::with('company')->take(4)->get();
-
-        $companies = Company::take(4)->get();
+        $companies = Company::with('jobs')->take(4)->get();
 
         return view('home', compact('categories', 'jobs', 'companies'));
     }

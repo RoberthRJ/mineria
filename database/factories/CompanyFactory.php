@@ -14,6 +14,7 @@ $factory->define(Company::class, function (Faker $faker) {
         'biography' => $faker->sentence,
         'links' => $links,
         'address' => $faker->address,
+        'province_id' => App\Province::all()->random()->id,
         'slug' => str_slug($title, '-'),
         'sector_id' => App\Sector::all()->random()->id,
     ];

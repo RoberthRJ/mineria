@@ -24,6 +24,7 @@
                             </span>
                             @enderror
                         </div>
+                        <input type="hidden" name="role_id" value="2">
                         <div class="single-login-field">
                             <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="Correo electrónico">
 

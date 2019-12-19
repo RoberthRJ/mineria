@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Company;
 use App\Http\Requests\CompanyRequest;
-use App\Offert;
+use App\Job
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -14,18 +14,18 @@ class AdminController extends Controller
     	return view('admin.index');
     }
 
-    public function offertCreate()
+    public function jobCreate()
     {
-        $offert = new Offert;
+        $job = new Job;
         $btnText = "Crear oferta";
-    	return view('admin.offert.create', compact('offert', 'btnText'));
+    	return view('admin.job.create', compact('job', 'btnText'));
     }
 
-    public function offertStore(Request $request)
+    public function jobStore(Request $request)
     {
         $request->merge(['slug' => str_slug($request['title'], '-')]);
         // dd($request->all());
-        Offert::create($request->input());
+        Job::create($request->input());
         return back()->with('status', 'El empleo ha sido creado correctamente');
     }
 

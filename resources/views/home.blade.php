@@ -7,7 +7,7 @@
 @section('content')
 
 <!--Home Video Start-->
-<section class="home-video-banner parallax" data-src="assets/img/slider-1.jpeg" data-jarallax-video="https://www.youtube.com/watch?v=dk9uNWPP7EA&list=PL7cdQfbJcOxP_Ii2ifE-8NXj_qP1Mzb7a',containment:'#welcome-video', showControls:false, autoPlay:true, mute:true, loop:true, startAt:0, quality:'default', opacity:1,}">
+<section class="home-video-banner parallax" data-src="assets/img/slider-1.jpeg" data-jarallax-video="https://www.youtube.com/watch?v=zAZQl0VmPcs&feature=youtu.be',containment:'#welcome-video', showControls:false, autoPlay:true, mute:true, loop:true, startAt:0, quality:'default', opacity:1,}">
    <div class="banner-area">
       <div class="banner-caption container">
          <div class="container">
@@ -15,24 +15,33 @@
                <div class="col-md-12 col-sm-12 content-home">
                   <div class="banner-welcome">
                      <h4><span>trabajos en minería</span> en todo el Perú</h4>
-                     <form>
+                     <form action="{{route('job.keyword.category.post')}}" method="POST">
+                        @csrf
                         <div class="video-banner-input">
-                           <input type="text" placeholder="Titulo, palabra o frase">
+                           <input type="text" placeholder="Titulo, palabra o frase" name="keyword" autofocus>
                         </div>
                         <div class="video-banner-input">
-                           <input type="text" placeholder="Ciudad o departamento">
+                           <!-- <input type="text" placeholder="Ciudad o departamento"> -->
+                           <select name="category_id" id="category_id">
+                            <option value="">Selecciona una categoría</option>
+                           @foreach(\App\Category::orderBy('category')->pluck('category', 'id') as $id => $category)
+                              <option {{(int) old('category_id') === $id ? 'selected' : ''}} value="{{ $id }}">
+                                  {{ $category }}
+                              </option>
+                           @endforeach
+                           </select>
                         </div>
                         <div class="video-banner-input">
                            <button type="submit"><i class="fa fa-search"></i></button>
                         </div>
                      </form>
-                     <div class="top-search-cat">
+                     <!-- <div class="top-search-cat">
                         <p>Top Search :</p>
                         <a href="#">Design</a>
                         <a href="#">Analysis</a>
                         <a href="#">training</a>
                         <a href="#">Music</a>
-                     </div>
+                     </div> -->
                   </div>
                </div>
             </div>
@@ -55,43 +64,37 @@
       </div>
       <div class="row">
 
-        @php
+        
 
-        for($i=0; $i < 4 ; $i++) { 
-            echo '<div class="col-lg-3 col-md-6 col-sm-6">
-              <a href="#" class="single-category-holder account_cat">
+        @for($i=0; $i < 4 ; $i++)
+            <div class="col-lg-3 col-md-6 col-sm-6">
+              <a href="{{route('job.by.category', $categories[$i]->slug)}}" class="single-category-holder account_cat">
                  <div class="category-holder-icon">
-                    <i class="fa '.$categories[$i]->icon.'"></i>
+                    <i class="fa {{$categories[$i]->icon}}"></i>
                  </div>
                  <div class="category-holder-text">
-                    <h3>'.$categories[$i]->category.'</h3>
+                    <h3>{{$categories[$i]->category}}</h3>
                  </div>
                  <img src="assets/img/account_cat.jpg" alt="category" />
               </a>
-           </div>';
-        };
-
-        @endphp
+           </div>
+        @endfor
 
       </div>
       <div class="row">
-        @php
-
-        for($i=4; $i < 8 ; $i++) { 
-            echo '<div class="col-lg-3 col-md-6 col-sm-6">
-              <a href="#" class="single-category-holder account_cat">
+        @for($i=4; $i < 8 ; $i++)
+            <div class="col-lg-3 col-md-6 col-sm-6">
+              <a href="{{route('job.by.category', $categories[$i]->slug)}}" class="single-category-holder account_cat">
                  <div class="category-holder-icon">
-                    <i class="fa '.$categories[$i]->icon.'"></i>
+                    <i class="fa {{$categories[$i]->icon}}"></i>
                  </div>
                  <div class="category-holder-text">
-                    <h3>'.$categories[$i]->category.'</h3>
+                    <h3>{{$categories[$i]->category}}</h3>
                  </div>
                  <img src="assets/img/account_cat.jpg" alt="category" />
               </a>
-           </div>';
-        };
-
-        @endphp
+           </div>
+        @endfor
       </div>
       <div class="row">
          <div class="col-md-12">
@@ -104,7 +107,47 @@
 </section>
 <!-- Categories Area End -->
  
- 
+@auth
+
+  @if(auth()->user()->candidate)
+  <!-- Inner Hire Area Start -->
+  <section class="jobguru-inner-hire-area section_100">
+     <div class="hire_circle"></div>
+     <div class="container">
+        <div class="row">
+           <div class="col-md-12">
+              <div class="inner-hire-left">
+                 <h3>Más de 5000 ofertas de empleo</h3>
+                 <p>placerat congue dui rhoncus sem et blandit .et consectetur Fusce nec nunc lobortis lorem ultrices facilisis. Ut dapibus placerat blandit nunc.congue dui rhoncus sem et blandit .et consectetur Fusce nec nunc lobortis lorem ultrices facilisis. Ut dapibus placerat blandi </p>
+                 <a href="{{route('job.index')}}" class="jobguru-btn-3">Ver ofertas de empleo</a>
+              </div>
+           </div>
+        </div>
+     </div>
+  </section>
+  <!-- Inner Hire Area End -->
+  @else
+  <!-- Inner Hire Area Start -->
+  <section class="jobguru-inner-hire-area section_100">
+     <div class="hire_circle"></div>
+     <div class="container">
+        <div class="row">
+           <div class="col-md-12">
+              <div class="inner-hire-left">
+                 <h3>Más de 2000 postulantes</h3>
+                 <p>placerat congue dui rhoncus sem et blandit .et consectetur Fusce nec nunc lobortis lorem ultrices facilisis. Ut dapibus placerat blandit nunc.congue dui rhoncus sem et blandit .et consectetur Fusce nec nunc lobortis lorem ultrices facilisis. Ut dapibus placerat blandi </p>
+                 <a href="{{route('job.index')}}" class="jobguru-btn-3">Publica tu oferta</a>
+              </div>
+           </div>
+        </div>
+     </div>
+  </section>
+  <!-- Inner Hire Area End -->
+  @endif
+
+
+@else
+
 <!-- Inner Hire Area Start -->
 <section class="jobguru-inner-hire-area section_100">
    <div class="hire_circle"></div>
@@ -112,15 +155,17 @@
       <div class="row">
          <div class="col-md-12">
             <div class="inner-hire-left">
-               <h3>Hire an employee</h3>
+               <h3>Necesitas contratar</h3>
                <p>placerat congue dui rhoncus sem et blandit .et consectetur Fusce nec nunc lobortis lorem ultrices facilisis. Ut dapibus placerat blandit nunc.congue dui rhoncus sem et blandit .et consectetur Fusce nec nunc lobortis lorem ultrices facilisis. Ut dapibus placerat blandi </p>
-               <a href="#" class="jobguru-btn-3">sign up as company</a>
+               <a href="{{route('company.register')}}" class="jobguru-btn-3">Ingresa como empresa</a>
             </div>
          </div>
       </div>
    </div>
 </section>
 <!-- Inner Hire Area End -->
+
+@endauth
  
  
 <!-- Job Tab Area Start -->
@@ -129,7 +174,7 @@
       <div class="row">
          <div class="col-md-12">
             <div class="site-heading">
-               <h2>Companies & <span>job offers</span></h2>
+               <h2>Empresas & <span>ofertas laborales</span></h2>
                <p>It's easy. Simply post a job you need completed and receive competitive bids from freelancers within minutes</p>
             </div>
          </div>
@@ -179,7 +224,7 @@
       <div class="row">
          <div class="col-md-12">
             <div class="load-more">
-               <a href="#" class="jobguru-btn">browse more listing</a>
+               <a href="{{route('job.index')}}" class="jobguru-btn">Ver más ofertas de empleo</a>
             </div>
          </div>
       </div>
@@ -194,11 +239,11 @@
       <div class="row">
          <div class="col-md-12">
             <div class="video-container">
-               <h2>Hire experts freelancers today for <br> any job, any time.</h2>
+               <h2>Encuentra a la persona indicada <br> para el puesto que requieres.</h2>
                <div class="video-btn">
                   <a class="popup-youtube" href="https://www.youtube.com/watch?v=k-R6AFn9-ek">
                   <i class="fa fa-play"></i>
-                  how it works
+                  Descubre cómo
                   </a>
                </div>
             </div>
@@ -215,7 +260,7 @@
       <div class="row">
          <div class="col-md-12">
             <div class="site-heading">
-               <h2>how it <span>works</span></h2>
+               <h2>¿Cómo <span>funciona?</span></h2>
                <p>It's easy. Simply post a job you need completed and receive competitive bids from freelancers within minutes</p>
             </div>
          </div>
@@ -228,7 +273,7 @@
                   <i class="fa fa-user"></i>
                </div>
                <div class="works-box-text">
-                  <p>sign up</p>
+                  <p>Ingresa</p>
                </div>
             </div>
          </div>
@@ -239,7 +284,7 @@
                   <i class="fa fa-gavel"></i>
                </div>
                <div class="works-box-text">
-                  <p>post job</p>
+                  <p>Publica una oferta</p>
                </div>
             </div>
          </div>
@@ -249,7 +294,7 @@
                   <i class="fa fa-thumbs-up"></i>
                </div>
                <div class="works-box-text">
-                  <p>choose expert</p>
+                  <p>Elije</p>
                </div>
             </div>
          </div>

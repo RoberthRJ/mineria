@@ -20,9 +20,12 @@ class CreateCompanyTable extends Migration
             $table->string('title')->nullable();
             $table->text('biography')->nullable();
             $table->string('links')->nullable();
-            $table->string('address');
+            $table->string('address')->nullable();
+            $table->unsignedInteger('province_id');
+            $table->foreign('province_id')->references('id')->on('provinces');
             $table->string('slug')->nullable();
-            $table->unsignedInteger('sector_id');
+            $table->string('phone')->nullable();
+            $table->unsignedInteger('sector_id')->nullable();
             $table->foreign('sector_id')->references('id')->on('sectors');
             $table->timestamps();
             $table->softDeletes();

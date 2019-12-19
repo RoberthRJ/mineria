@@ -18,6 +18,7 @@ class CreateProvincesTable extends Migration
             $table->unsignedInteger('department_id');
             $table->foreign('department_id')->references('id')->on('departments');
             $table->string('province');
+            $table->string('slug')->nullable();
             $table->timestamps();
         });
     }

@@ -8,6 +8,8 @@ use App\Company;
 use App\Job;
 use App\JobType;
 use App\Province;
+use App\Sector;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Job extends Model
@@ -15,9 +17,14 @@ class Job extends Model
     protected $table = "jobs";
     protected $guarded = ['id'];
 
+    protected $withCount = ['candidates'];
+
     const PUBLISHED = 1;
     const PENDING = 2;
     const REJECTED = 3;
+
+    const APPLIED = 1;
+    const REVIEWED = 2;
 
     public function getRouteKeyName() {
 		return 'slug';
@@ -50,5 +57,14 @@ class Job extends Model
 			->latest()
 			->limit(2)
 			->get();
+	}
+
+	public function publishedDate()
+	{
+		if (Carbon::now()->diffInHours($this->created_at) < 24) {
+			return "Hace ".Carbon::now()->diffInHours($this->created_at)." horas";
+		}else{
+			return "Hace ".Carbon::now()->diffInDays($this->created_at)." días";
+		}
 	}
 }

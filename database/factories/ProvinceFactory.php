@@ -6,8 +6,10 @@ use App\Province;
 use Faker\Generator as Faker;
 
 $factory->define(Province::class, function (Faker $faker) {
+	$province = $faker->word;
     return [
         'department_id' => App\Department::all()->random()->id,
-        'province' => $faker->word
+        'province' => $province,
+        'slug' => str_slug($province, '-'),
     ];
 });

@@ -68,15 +68,15 @@ JS INDEX
 
 		$("#slider").slider({
 			range: true,
-			min: 500,
+			min: 1,
 			max: 20000,
-			values: [1500, 20000],
+			values: [1, 20000],
 			slide: function (event, ui) {
-				$("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
+				$("#amount").val("S/" + ui.values[0] + " - S/" + ui.values[1]);
 			}
 		});
-		$("#amount").val("$" + $("#slider").slider("values", 0) +
-			" - $" + $("#slider").slider("values", 1));
+		$("#amount").val("S/" + $("#slider").slider("values", 0) +
+			" - S/" + $("#slider").slider("values", 1));
 
 
 		/* 
@@ -141,6 +141,23 @@ JS INDEX
 		});
 		$('.sidebar-category-select-2').select2({
 			placeholder: 'Elige una categoría'
+		});
+
+
+		/* 
+		=================================================================
+		06 - Select-2
+		=================================================================	
+		*/
+
+
+		$('.banner-select').select2()
+
+		$('.sidebar-category-select').select2({
+			placeholder: ''
+		});
+		$('.sidebar-category-select-3').select2({
+			placeholder: 'Elige una localidad'
 		});
 
 

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Candidate;
+use App\Company;
 use App\User;
+use App\Role;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
@@ -50,7 +52,9 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+        // dd($data);
         return Validator::make($data, [
+            'role_id' => ['max:1'],
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
@@ -65,21 +69,38 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
+        if ($data['role_id'] == Role::COMPANY) {
+            return User::create([
+                'role_id' => Role::COMPANY,
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'password' => Hash::make($data['password']),
+                'picture' => 'default_user.jpg',
+            ]);
+        }else{
+            return User::create([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'password' => Hash::make($data['password']),
+                'picture' => 'default_user.jpg',
+            ]);
+        }
     }
 
 
     protected function registered( Request $request, $user )
     {
-        Candidate::create([
-            'user_id' => $user->id,
-            'name' => $user->name,
-            'picture' => 'default_user.jpg'
-        ]);
+        if ($user->role_id == Role::COMPANY) {
+            Company::create([
+                'user_id' => $user->id,
+                'title' => $user->name,
+            ]);
+        }else{
+            Candidate::create([
+                'user_id' => $user->id,
+                'name' => $user->name,
+            ]);
+        }
         return redirect('/');
     }
 }

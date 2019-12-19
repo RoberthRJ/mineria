@@ -18,7 +18,7 @@ $factory->define(Candidate::class, function (Faker $faker) {
         'professional_title' => $faker->sentence,
         'address' => $faker->address,
         'phone' => $faker->phoneNumber,
-        'languajes' => $languajes,
+        'languages' => $languajes,
         'skills' => $skills,
         'slug' => str_slug($name." ".$last_name, '-'),
         'department_id' => App\Department::all()->random()->id,

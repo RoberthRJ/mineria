@@ -52,7 +52,7 @@ class DatabaseSeeder extends Seeder
             'role_id' => App\Role::ADMIN,
         ])
         ->each(function(App\User $u){
-            factory(App\Candidate::class, 1)->create(['user_id' => $u->id]); 
+            factory(App\Candidate::class, 1)->create(['user_id' => $u->id, 'name' => $u->name]); 
         });
 
         factory(App\User::class, 1)->create([
@@ -61,12 +61,12 @@ class DatabaseSeeder extends Seeder
             'role_id' => App\Role::CANDIDATE,
         ])
         ->each(function(App\User $u){
-            factory(App\Candidate::class, 1)->create(['user_id' => $u->id]); 
+            factory(App\Candidate::class, 1)->create(['user_id' => $u->id, 'name' => $u->name]); 
         });
 
         factory(App\User::class, 20)->create()
         ->each(function(App\User $u){
-            factory(App\Candidate::class, 1)->create(['user_id' => $u->id]); 
+            factory(App\Candidate::class, 1)->create(['user_id' => $u->id, 'name' => $u->name]); 
         });
 
         factory(App\User::class, 1)->create([
@@ -75,14 +75,14 @@ class DatabaseSeeder extends Seeder
             'role_id' => App\Role::COMPANY,
         ])
         ->each(function(App\User $u){
-            factory(App\Company::class, 1)->create(['user_id' => $u->id]); 
+            factory(App\Company::class, 1)->create(['user_id' => $u->id, 'title' => $u->name]); 
         });
 
         factory(App\User::class, 10)->create([
             'role_id' => App\Role::COMPANY,
         ])
         ->each(function(App\User $u){
-            factory(App\Company::class, 1)->create(['user_id' => $u->id]);  
+            factory(App\Company::class, 1)->create(['user_id' => $u->id, 'title' => $u->name]);  
         });
 
         factory(App\Job::class, 100)->create();
@@ -90,5 +90,7 @@ class DatabaseSeeder extends Seeder
         factory(App\Education::class, 60)->create();
         factory(App\WorkExperience::class, 70)->create();
 
+        Storage::deleteDirectory('files');
+        Storage::makeDirectory('files');
     }
 }

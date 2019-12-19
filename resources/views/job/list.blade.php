@@ -19,12 +19,14 @@
           <div class="job-grid-right">
              <div class="browse-job-head-option">
                 <div class="job-browse-search">
-                   <form>
-                      <input type="search" placeholder="Search Jobs Here...">
+                   <form method="POST" action="{{route('job.keyword.category.post')}}">
+                      @csrf
+                      <input type="search" placeholder="Busca un empleo..." name="keyword">
+                      <input type="hidden" name="category_id" value="">
                       <button type="submit"><i class="fa fa-search"></i></button>
                    </form>
                 </div>
-                <div class="job-browse-action">
+                <!-- <div class="job-browse-action">
                    <div class="email-alerts">
                       <input type="checkbox" class="styled" id="b_1">
                       <label class="styled" for="b_1">email alerts for this search</label>
@@ -37,7 +39,7 @@
                          <li>Random</li>
                       </ul>
                    </div>
-                </div>
+                </div> -->
              </div>
              <!-- end job head -->
              <div class="job-sidebar-list-single">
@@ -50,17 +52,6 @@
 
              </div>
              <!-- end job sidebar list -->
-             <div class="pagination-box-row">
-                <p>Page 1 of 6</p>
-                <ul class="pagination">
-                   <li class="active"><a href="#">1</a></li>
-                   <li><a href="#">2</a></li>
-                   <li><a href="#">3</a></li>
-                   <li>...</li>
-                   <li><a href="#">6</a></li>
-                   <li><a href="#"><i class="fa fa-angle-double-right"></i></a></li>
-                </ul>
-             </div>
              {{ $jobs->links() }}
              <!-- end pagination -->
           </div>
@@ -73,5 +64,68 @@
 @endsection
 
 @push('scripts')
+
+<script>
+  $('.date_filter').on('click', function(){
+    var value = $(this).val();
+    var data = {
+      title: 'date',
+      value: value
+    }
+    ajax(data);
+  })
+
+  $('.category_filter').on('change', function(){
+    var value = $(this).val();
+    var data = {
+      title: 'category',
+      value: value
+    }
+    ajax(data);
+  })
+
+  $('.department_filter').on('change', function(){
+    var value = $(this).val();
+    var data = {
+      title: 'department',
+      value: value
+    }
+    ajax(data);
+  })
+
+  var type = [];
+  $('input[type="checkbox"]').click(function(){
+    var value = $(this).val();
+      
+    if($(this).prop("checked")){
+        type.push(value);
+      }
+      else if(!$(this).prop("checked")){
+        pos = type.indexOf(value);
+        type.splice(pos, 1); 
+      }
+    var data = {
+      title: 'type',
+      value: type
+    }
+    ajax(data);
+  });
+
+  function ajax(data){
+    jQuery.ajax({
+      url: '{{ route('search.ajax') }}',
+      type: 'POST',
+      headers: {
+          'x-csrf-token': $("meta[name=csrf-token]").attr('content')
+      },
+      data: {
+          data: data
+      },
+      success: (res) => {
+        console.log(res);
+      }
+    })
+  }
+</script>
 
 @endpush

@@ -56,40 +56,10 @@
                         <label for="languages">Idiomas</label>
                         <select class="sidebar-category-select" name="languages[]" multiple="multiple" id="languages">
                            <option value="1" 
-                           @php
-
-                           for($i = 0; $i < count(json_decode(auth()->user()->candidate->languages, true)) ; $i++)
-                           {
-                              if (json_decode(auth()->user()->candidate->languages, true)[$i] == 1){
-                                echo 'selected';
-                              }
-                           }
-
-                           @endphp
                            >Español</option>
                            <option value="2"
-                           @php
-
-                           for($i = 0; $i < count(json_decode(auth()->user()->candidate->languages, true)) ; $i++)
-                           {
-                              if (json_decode(auth()->user()->candidate->languages, true)[$i] == 2){
-                                echo 'selected';
-                              }
-                           }
-
-                           @endphp
                            >Inglés</option>
                            <option value="3"
-                            @php
-
-                           for($i = 0; $i < count(json_decode(auth()->user()->candidate->languages, true)) ; $i++)
-                           {
-                              if (json_decode(auth()->user()->candidate->languages, true)[$i] == 3){
-                                echo 'selected';
-                              }
-                           }
-
-                           @endphp
                            >Francés</option>
                         </select>
                      </div>
@@ -135,7 +105,7 @@
                         </select>
                      </div>
                      <div class="single-input">
-                        <label for="province_id">Departamento</label>
+                        <label for="province_id">Provincia</label>
                         <select id="province_id" name="province_id" class="form-control">
                            @foreach(\App\province::orderBy('province')->pluck('province', 'id') as $id => $province)
                              <option {{ (int) old('province_id') === $id || auth()->user()->candidate->province_id === $id ? 'selected' : '' }} value="{{ $id }}">

@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Candidate;
 use App\Job;
+use App\Mail\NewApplicationToJob;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CandidateController extends Controller
 {
@@ -23,10 +25,22 @@ class CandidateController extends Controller
 
         $job->candidates()->attach(auth()->user()->candidate->id);
 
-        // \Mail::to($course->teacher->user)->send(new NewStudentInCourse($course, auth()->user()->name));
+        \Mail::to($job->company->user)->send(new NewApplicationToJob( $job , auth()->user()->candidate));
 
-        return redirect()->route('dashboard.index', 'profile');;
+        return back()->with('message', "Has posulado exitosamente");
     }
 
+    public function dashboard($word)
+    {
+        if ($word == 'applications') {
 
+            $applications = Job::whereHas('candidates', function($query) {
+                $query->where('candidate_id', auth()->user()->candidate->id);
+            })->orderBy('created_at', 'desc')->paginate(10);
+
+            return view('partials.dashboard.index', compact('word', 'applications'));
+        }
+
+        return view('partials.dashboard.index', compact('word'));
+    }
 }

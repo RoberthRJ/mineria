@@ -1402,7 +1402,7 @@ header,
 ==================================================*/
 
 .jobguru-video-area {
-	background: url(../img/video_bg.jpeg) no-repeat fixed 0 0/cover;
+	background: url(../img/video_bg.jpg) no-repeat fixed 0 0/cover;
 	position: relative;
 	z-index: 1
 }
@@ -1959,6 +1959,12 @@ ul.footer-social li a>i {
 	border: medium none;
 }
 
+.banner-welcome form .video-banner-input select{
+	border: none !important;
+	width: 100%;
+	padding: 8px 10px;
+}
+
 .banner-welcome form .video-banner-input {
 	padding: 10px 12px;
 	box-shadow: 0 2px 12px rgba(0, 0, 0, .09);
@@ -1993,6 +1999,8 @@ ul.footer-social li a>i {
 .banner-welcome form .video-banner-input:last-child button:hover {
 	background: #1e8d4e none repeat scroll 0 0
 }
+
+
 
 .top-search-cat p {
 	display: inline-block;

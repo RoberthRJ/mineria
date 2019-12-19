@@ -26,10 +26,11 @@ class CreateJobsTable extends Migration
             $table->foreign('job_type_id')->references('id')->on('job_types');
             $table->unsignedInteger('province_id');
             $table->foreign('province_id')->references('id')->on('provinces');
-            $table->float('min_salary', 8,2);
-            $table->float('max_salary', 8,2);
-            $table->datetime('expiration_date');
+            $table->float('min_salary', 8,2)->nullable();
+            $table->float('max_salary', 8,2)->nullable();
+            $table->timestamp('expiration_date')->nullable();
             $table->string('slug');
+            $table->string('external_link')->nullable();
             $table->enum('status', [Job::PUBLISHED, Job::PENDING, Job::REJECTED])->default(Job::PENDING);
             $table->boolean('previous_approved')->default(false);
             $table->boolean('previous_rejected')->default(false);
