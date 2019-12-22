@@ -38,9 +38,10 @@ Route::get('/{department}/jobs', 'JobController@jobByDepartment')->name('job.by.
 Route::get('/{department}/jobs/category/{category}', 'JobController@list')->name('job.list');
 
 Route::get('/{department}/jobs/subcategory/{subcategory}', 'JobController@list')->name('job.list');
-// Route::get('/{department}/{province}', 'JobController@list')->name('job.list');
 
 Route::get('/categories', 'JobController@categories')->name('category.index');
+
+Route::get('/jobs/subcategories/{subcategories}', 'JobController@jobBySubcategory')->name('job.by.subcategory');
 
 Route::post('/search', 'JobController@keywordCategoryPost')->name('job.keyword.category.post');
 
@@ -67,6 +68,8 @@ Route::prefix('company')->group(function () {
 	Route::get('/{company}', 'CompanyController@show')->name('company.show');
 	
 });
+
+Route::post('/secondAjax', 'JobController@secondAjax')->name('second.ajax');
 
 Route::prefix('job')->group(function () {
 

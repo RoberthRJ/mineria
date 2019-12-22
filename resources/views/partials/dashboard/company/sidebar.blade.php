@@ -22,7 +22,6 @@
             </a>
          </li>
          @include('partials.dashboard.password')
-         @include('partials.dashboard.logout')
       </ul>
    </div>
 </div>

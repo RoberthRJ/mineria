@@ -37,8 +37,8 @@ class CandidateController extends Controller
         $job->candidates()->attach(auth()->user()->candidate->id);
 
         \Mail::to($job->company->user)->send(new NewApplicationToJob( $job , auth()->user()->candidate));
-
-        return back()->with('message', "Has posulado exitosamente");
+        
+        return back()->with('message', ['status' => 'success', 'message' => "Has posulado exitosamente"]);
     }
 
     public function dashboard($word = 'dashboard')

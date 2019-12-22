@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Category;
 use App\Department;
 use App\Helpers\Helper;
+use App\Http\Requests\PostRequest;
 use App\Job;
 use App\Province;
 use App\Subcategory;
@@ -59,6 +60,20 @@ class JobController extends Controller
         $jobs = Job::orderBy('created_at')
                         ->whereIn('subcategory_id', $subcategories)
                         ->paginate(10);
+        return view('job.list', compact('jobs'));
+    }
+
+    public function jobBySubcategory($subcategories)
+    {
+        if ($subcategories == 'all') {
+            $jobs = Job::orderBy('created_at')
+                        ->paginate(10);
+        }else{
+            $subcategories = explode( '-', $subcategories );
+            $jobs = Job::orderBy('created_at')
+                        ->whereIn('subcategory_id', $subcategories)
+                        ->paginate(10);
+        }
         return view('job.list', compact('jobs'));
     }
 
@@ -134,6 +149,10 @@ class JobController extends Controller
 
     public function searchAyax()
     {
+        if (!request()->ajax()) {
+            return back();
+        }
+
         $data = \request('data');
         // $title = $data['title'];
         // $value = $data['value'];
@@ -145,7 +164,12 @@ class JobController extends Controller
                 $url = route('job.by.category', $category->slug);
                 break;
             case "subcategory":
-                return 'subcategory';
+                if (isset($data['value'])) {
+                    $types = implode("-", $data['value']);
+                }else{
+                    $types = 'all';
+                }
+                $url = route('job.by.subcategory', $types);
                 break;
             case "date":
                 return $data['value'];
@@ -169,12 +193,33 @@ class JobController extends Controller
         return $url;
     }
 
-    public function store(Request $request)
+    public function store(PostRequest $request)
     {
         $request->merge(['company_id' => auth()->user()->company->id ?: 0 ]);   
         $request->merge(['slug' => str_slug($request['title'], '-')]);
         // dd($request->all());
         Job::create($request->input());
         return back()->with('status', 'El empleo ha sido creado correctamente');
+    }
+
+    public function secondAjax()
+    {
+        if (!request()->ajax()) {
+            return back();
+        }
+        
+        $data = \request('data');
+
+        switch ($data['title']) {
+            case "department":
+                $data = Province::whereDepartmentId($data['value'])->orderBy('province')->get();
+                break;
+            case "category":
+                $data = Subcategory::whereCategoryId($data['value'])->orderBy('subcategory')->get();
+                break;
+            default:
+                return 'nothing';
+        }
+        return $data;
     }
 }
