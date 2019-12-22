@@ -2,24 +2,29 @@
    <div class="dashboard-right">
       <div class="candidate-profile">
          <div class="candidate-single-profile-info">
-            <div class="single-resume-feild resume-avatar">
-               <div class="resume-image company-resume-image">
-                  <img src="{{auth()->user()->pathAttachment()}}" alt="resume avatar">
-                  <div class="resume-avatar-hover">
-                     <div class="resume-avatar-upload">
-                        <p>
-                           <i class="fa fa-pencil"></i>
-                           Editar
-                        </p>
-                        <input type="file">
+            <form method="POST" action="{{route('update.company.profile', auth()->user()->company->id)}}"enctype="multipart/form-data" novalidate>
+               @csrf
+               @method('PUT')
+               <div class="single-resume-feild resume-avatar">
+                  <div class="resume-image company-resume-image">
+                     <img src="{{auth()->user()->pathAttachment()}}" alt="{{auth()->user()->company->title}}">
+                     <div class="resume-avatar-hover">
+                        <div class="resume-avatar-upload">
+                           <p>
+                              <i class="fa fa-pencil"></i>
+                              Actualizar
+                           </p>
+                           <input type="file" name="picture" id="picture">
+                        </div>
                      </div>
                   </div>
                </div>
-            </div>
+
+            <!-- </form> -->
          </div>
          <div class="candidate-single-profile-info">
-            <form method="POST" action="{{route('update.company.profile', auth()->user()->company->id)}}" novalidate>
-               @csrf
+            <!-- <form method="POST" action="{{route('update.company.profile', auth()->user()->company->id)}}" novalidate>
+               @csrf -->
                <div class="resume-box">
                   <h3>Perfil de empresa</h3>
                   <div class="single-resume-feild feild-flex-2">

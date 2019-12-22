@@ -8,117 +8,30 @@
             <table class="table">
                <thead>
                   <tr>
-                     <th>Title</th>
-                     <th>Posted on </th>
-                     <th>Expiring on </th>
-                     <th>Status</th>
-                     <th>action</th>
+                     <th>Titulo</th>
+                     <th>Publicado </th>
+                     <th>Expira </th>
+                     <th>Estado</th>
+                     <th>Acciones</th>
                   </tr>
                </thead>
                <tbody>
+                  @foreach($jobs as $job)
                   <tr>
-                     <td class="manage-jobs-title"><a href="#">Frontend React Developer</a></td>
-                     <td class="table-date">28 June, 2018</td>
-                     <td class="table-date">10 July, 2018</td>
-                     <td><span class="pending">Pending Approval</span></td>
+                     <td class="manage-jobs-title"><a href="#">{{$job->title}}</a></td>
+                     <td class="table-date">{{$job->created_at->format('d/m/Y')}}</td>
+                     <td class="table-date">{{$job->expiration_date}}</td>
+                     <td><span class="pending">{{$job->status()}}</span></td>
                      <td class="action">
-                        <a href="#" class="action-edit"><i class="fa fa-pencil-square-o"></i></a>
-                        <a href="#" class="action-delete"><i class="fa fa-trash-o"></i></a>
+                        <a href="{{route('company.dashboard.candidates', $job->slug)}}" class="action-edit" title="Ver postulantes"><i class="fa fa-users"></i></a>
+                        <a href="#" class="action-edit" title="Editar"><i class="fa fa-pencil-square-o"></i></a>
+                        <a href="#" class="action-delete" title="Eliminar"><i class="fa fa-trash-o"></i></a>
                      </td>
                   </tr>
-                  <tr>
-                     <td class="manage-jobs-title"><a href="#">Full Stack PHP Developer </a></td>
-                     <td class="table-date">28 June, 2018</td>
-                     <td class="table-date">10 July, 2018</td>
-                     <td><span class="expired">Expired</span></td>
-                     <td class="action">
-                        <a href="#" class="action-edit"><i class="fa fa-pencil-square-o"></i></a>
-                        <a href="#" class="action-delete"><i class="fa fa-trash-o"></i></a>
-                     </td>
-                  </tr>
-                  <tr>
-                     <td class="manage-jobs-title"><a href="#">Node.js Developer</a></td>
-                     <td class="table-date">28 June, 2018</td>
-                     <td class="table-date">10 July, 2018</td>
-                     <td><span class="pending">Pending Approval</span></td>
-                     <td class="action">
-                        <a href="#" class="action-edit"><i class="fa fa-pencil-square-o"></i></a>
-                        <a href="#" class="action-delete"><i class="fa fa-trash-o"></i></a>
-                     </td>
-                  </tr>
-                  <tr>
-                     <td class="manage-jobs-title"><a href="#">Frontend React Developer</a></td>
-                     <td class="table-date">28 June, 2018</td>
-                     <td class="table-date">10 July, 2018</td>
-                     <td><span class="pending">Pending Approval</span></td>
-                     <td class="action">
-                        <a href="#" class="action-edit"><i class="fa fa-pencil-square-o"></i></a>
-                        <a href="#" class="action-delete"><i class="fa fa-trash-o"></i></a>
-                     </td>
-                  </tr>
-                  <tr>
-                     <td class="manage-jobs-title"><a href="#">Full Stack PHP Developer </a></td>
-                     <td class="table-date">28 June, 2018</td>
-                     <td class="table-date">10 July, 2018</td>
-                     <td><span class="expired">Expired</span></td>
-                     <td class="action">
-                        <a href="#" class="action-edit"><i class="fa fa-pencil-square-o"></i></a>
-                        <a href="#" class="action-delete"><i class="fa fa-trash-o"></i></a>
-                     </td>
-                  </tr>
-                  <tr>
-                     <td class="manage-jobs-title"><a href="#">Node.js Developer</a></td>
-                     <td class="table-date">28 June, 2018</td>
-                     <td class="table-date">10 July, 2018</td>
-                     <td><span class="pending">Pending Approval</span></td>
-                     <td class="action">
-                        <a href="#" class="action-edit"><i class="fa fa-pencil-square-o"></i></a>
-                        <a href="#" class="action-delete"><i class="fa fa-trash-o"></i></a>
-                     </td>
-                  </tr>
-                  <tr>
-                     <td class="manage-jobs-title"><a href="#">Frontend React Developer</a></td>
-                     <td class="table-date">28 June, 2018</td>
-                     <td class="table-date">10 July, 2018</td>
-                     <td><span class="pending">Pending Approval</span></td>
-                     <td class="action">
-                        <a href="#" class="action-edit"><i class="fa fa-pencil-square-o"></i></a>
-                        <a href="#" class="action-delete"><i class="fa fa-trash-o"></i></a>
-                     </td>
-                  </tr>
-                  <tr>
-                     <td class="manage-jobs-title"><a href="#">Full Stack PHP Developer </a></td>
-                     <td class="table-date">28 June, 2018</td>
-                     <td class="table-date">10 July, 2018</td>
-                     <td><span class="expired">Expired</span></td>
-                     <td class="action">
-                        <a href="#" class="action-edit"><i class="fa fa-pencil-square-o"></i></a>
-                        <a href="#" class="action-delete"><i class="fa fa-trash-o"></i></a>
-                     </td>
-                  </tr>
-                  <tr>
-                     <td class="manage-jobs-title"><a href="#">Node.js Developer</a></td>
-                     <td class="table-date">28 June, 2018</td>
-                     <td class="table-date">10 July, 2018</td>
-                     <td><span class="pending">Pending Approval</span></td>
-                     <td class="action">
-                        <a href="#" class="action-edit"><i class="fa fa-pencil-square-o"></i></a>
-                        <a href="#" class="action-delete"><i class="fa fa-trash-o"></i></a>
-                     </td>
-                  </tr>
+                  @endforeach
                </tbody>
             </table>
-            <div class="pagination-box-row">
-               <p>Page 1 of 6</p>
-               <ul class="pagination">
-                  <li class="active"><a href="#">1</a></li>
-                  <li><a href="#">2</a></li>
-                  <li><a href="#">3</a></li>
-                  <li>...</li>
-                  <li><a href="#">6</a></li>
-                  <li><a href="#"><i class="fa fa-angle-double-right"></i></a></li>
-               </ul>
-            </div>
+            {{$jobs->links()}}
          </div>
       </div>
    </div>

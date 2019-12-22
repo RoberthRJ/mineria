@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Subcategory;
 use App\Category;
-use App\Job;
+use App\Department;
 use App\Helpers\Helper;
+use App\Job;
+use App\Province;
+use App\Subcategory;
 use Illuminate\Http\Request;
 
 class JobController extends Controller
@@ -49,7 +51,42 @@ class JobController extends Controller
 
     public function jobByCategory(Category $category)
     {
-        $jobs = Job::orderBy('created_at')->paginate(10);
+        $subcategories_array = Subcategory::whereCategoryId($category->id)
+                                            ->get()
+                                            ->map
+                                            ->only(['id']);
+        $subcategories = Helper::dataToArray($subcategories_array);
+        $jobs = Job::orderBy('created_at')
+                        ->whereIn('subcategory_id', $subcategories)
+                        ->paginate(10);
+        return view('job.list', compact('jobs'));
+    }
+
+    public function jobByDepartment(Department $department)
+    {
+        $provinces_array = Province::whereDepartmentId($department->id)
+                                            ->get()
+                                            ->map
+                                            ->only(['id']);
+        $provinces = Helper::dataToArray($provinces_array);
+        $jobs = Job::orderBy('created_at')
+                        ->whereIn('province_id', $provinces)
+                        ->paginate(10);
+        return view('job.list', compact('jobs'));
+    }
+
+    public function jobByType($type)
+    {
+        if ($type == 'all') {
+            $jobs = Job::orderBy('created_at')
+                        ->paginate(10);
+        }else{
+            $types = explode( '-', $type );
+            $jobs = Job::orderBy('created_at')
+                        ->whereIn('job_type_id', $types)
+                        ->paginate(10);
+        }
+        
         return view('job.list', compact('jobs'));
     }
 
@@ -104,26 +141,32 @@ class JobController extends Controller
         // $value = session('title');
         switch ($data['title']) {
             case "category":
-                return 'category';
+                $category = Category::whereId($data['value'])->first();
+                $url = route('job.by.category', $category->slug);
                 break;
             case "subcategory":
                 return 'subcategory';
                 break;
             case "date":
-                return 'date';
+                return $data['value'];
                 break;
             case "type":
-                return 'type';
-                break;
-            case "salary":
-                return 'salary';
+                if (isset($data['value'])) {
+                    $types = implode("-", $data['value']);
+                }else{
+                    $types = 'all';
+                }
+                $url = route('job.by.type', $types);
                 break;
             case "department":
-                return 'department';
+                $department = Department::whereId($data['value'])->first();
+                $url = route('job.by.department', $department->slug);
                 break;
             default:
                 return 'nothing';
         }
+
+        return $url;
     }
 
     public function store(Request $request)

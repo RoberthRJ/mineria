@@ -5,7 +5,7 @@
 		      <li class="has-children">
 		         <a href="#"> <i class="fa fa-user"></i> Mi cuenta</a>
 		         <ul>
-		            <li><a href="{{route('dashboard.index')}}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+		            <li><a href="{{route('company.dashboard.index', '')}}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
 		            @include('partials.navigations.logout')
 		         </ul>
 		      </li>

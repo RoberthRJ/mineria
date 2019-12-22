@@ -16,8 +16,8 @@
                 <img src="/images/users/logo_4.png" alt="Verlie Mertz" />
              </div>
              <div class="single-candidate-box-right">
-                <h4>Inventore similique inventore voluptas magni earum.</h4>
-                <p>Verlie Mertz</p>
+                <h4>{{--$company->title--}}</h4>
+                <p>{{--$company->sector->sector--}}</p>
              </div>
           </div>
        </div>
@@ -32,7 +32,7 @@
          <!--end col-->
          <div class="col-md-12">
             <div class="available-count">
-               <h4><a href="javascript:void(0)">{{$jobs->count()}}</a> ofertas de empleo publicadas</h4>
+               <h4><a href="javascript:void(0)">{{$jobs[0]->company->jobs_count}}</a> ofertas de empleo publicadas</h4>
             </div>
          </div>
       </div>
@@ -41,6 +41,7 @@
          @include('company.job-card')
          @endforeach
       </div>
+      {{$jobs->links()}}
    </div>
 </section>
 <!-- Top Job Area End -->

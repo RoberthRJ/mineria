@@ -2,13 +2,13 @@
    <div class="dashboard-left">
       <ul class="dashboard-menu">
          <li class="{{ $word == 'dashboard' ? 'active' : '' }}">
-            <a href="{{route('dashboard.index')}}">
+            <a href="{{route('candidate.dashboard.index')}}">
                <i class="fa fa-tachometer"></i>
                Dashboard
             </a>
          </li>
          <li class="{{ $word == 'profile' ? 'active' : '' }}">
-            <a href="{{route('dashboard.index', 'profile')}}">
+            <a href="{{route('candidate.dashboard.index', 'profile')}}">
                <i class="fa fa-users"></i>
                Mi perfil
             </a>
@@ -20,7 +20,7 @@
             </a>
          </li> -->
          <li class="{{ $word == 'applications' ? 'active' : '' }}">
-            <a href="{{route('dashboard.index', 'applications')}}">
+            <a href="{{route('candidate.dashboard.index', 'applications')}}">
                <i class="fa fa-briefcase"></i>
                Postulaciones
             </a>

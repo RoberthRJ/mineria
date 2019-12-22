@@ -2,6 +2,9 @@
    <div class="dashboard-right">
       <div class="candidate-profile">
          <div class="candidate-single-profile-info">
+            <form method="POST" action="{{route('update.candidate.profile', auth()->user()->candidate->slug)}}" enctype="multipart/form-data" novalidate>
+            @csrf
+            @method('PUT')
             <div class="single-resume-feild resume-avatar">
                <div class="resume-image">
                   <img src="{{auth()->user()->pathAttachment()}}" alt="{{auth()->user()->candidate->name}}">
@@ -11,15 +14,14 @@
                            <i class="fa fa-pencil"></i>
                            Editar
                         </p>
-                        <input type="file" name="picture">
+                        <input type="file" name="picture" id="picture">
                      </div>
                   </div>
                </div>
             </div>
          </div>
          <div class="candidate-single-profile-info">
-            <form method="POST" action="{{route('update.candidate.profile', auth()->user()->candidate->id)}}" novalidate>
-              @csrf
+            
                <div class="resume-box">
                   <h3>Mi perfil</h3>
                   <div class="single-resume-feild feild-flex-2">

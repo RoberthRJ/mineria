@@ -10,7 +10,7 @@
          <h3><a href="{{route('job.show', $job->slug)}}">{{$job->title}}</a></h3>
          <p class="company-state"><i class="fa fa-map-marker"></i> {{$job->province->province}}, {{$job->province->department->department}}</p>
          <p class="open-icon"><i class="fa fa-clock-o"></i>{{$job->publishedDate()}}</p>
-         <p class="varify"><i class="fa fa-check"></i>Sueldo ofertado : S/{{$job->min_salary}} - S/{{$job->max_salary}}</p>
+         <p class="varify"><i class="fa fa-check"></i>Sueldo ofertado : S/{{round($job->min_salary, 0)}} - S/{{round($job->max_salary, 0)}}</p>
       </div>
       <div class="company-list-btn">
          <a href="{{route('job.show', $job->slug)}}" class="jobguru-btn">Ver oferta</a>

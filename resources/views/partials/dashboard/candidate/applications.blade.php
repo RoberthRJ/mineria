@@ -12,7 +12,6 @@
                      <th>Fecha de posteo </th>
                      <th>Fecha de expiracion </th>
                      <th>Estado</th>
-                     <th>Acciones</th>
                   </tr>
                </thead>
                <tbody>
@@ -20,12 +19,8 @@
                   <tr>
                      <td class="manage-jobs-title"><a href="{{route('job.show',$application->slug)}}">{{$application->title}}</a></td>
                      <td class="table-date">{{$application->created_at->format('d-m-Y')}}</td>
-                     <td class="table-date">{{--$application->expiration_date->format('d-m-Y')--}}</td>
+                     <td class="table-date">{{$application->expiration_date}}</td>
                      <td><span class="pending">Pending Approval</span></td>
-                     <td class="action">
-                        <a href="#" class="action-edit"><i class="fa fa-pencil-square-o"></i></a>
-                        <a href="#" class="action-delete"><i class="fa fa-trash-o"></i></a>
-                     </td>
                   </tr>
                   @empty
                   <tr>

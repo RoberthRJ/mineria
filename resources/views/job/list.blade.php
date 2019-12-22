@@ -108,7 +108,10 @@
       title: 'type',
       value: type
     }
-    ajax(data);
+    setTimeout(function(){
+      ajax(data)
+    }, 5000);
+    
   });
 
   function ajax(data){
@@ -123,6 +126,7 @@
       },
       success: (res) => {
         console.log(res);
+        // window.location = res;
       }
     })
   }

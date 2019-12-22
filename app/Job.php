@@ -67,4 +67,25 @@ class Job extends Model
 			return "Hace ".Carbon::now()->diffInDays($this->created_at)." días";
 		}
 	}
+
+	public function status()
+	{
+		switch ($this->status) {
+			case Job::PUBLISHED:
+				return  'Publicado';
+				break;
+
+			case Job::PENDING:
+				return 'Pendiente';
+				break;
+
+			case Job::REJECTED:
+				return 'Rechazado';
+				break;
+
+			default:
+				return 'Expirado';
+				break;
+		}
+	}
 }

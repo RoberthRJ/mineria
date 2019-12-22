@@ -2,23 +2,34 @@
 
 namespace App\Http\Controllers;
 
-use App\Candidate;
 use App\Job;
+use App\User;
+use App\Candidate;
+use App\Helpers\Helper;
 use App\Mail\NewApplicationToJob;
+use App\Rules\StrengthPassword;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class CandidateController extends Controller
 {
     public function updateProfile(Request $request)
     {
+        // dd($request->all());
         $candidate = Candidate::whereId(auth()->user()->candidate->id)->first();
+        if($request->hasFile('picture')) {
+            // dd($request->all());
+            \Storage::delete('users/' . $candidate->user->picture);
+            $picture = Helper::uploadFile( "picture", 'users');
+            $candidate->user->picture = $picture;
+            $candidate->user->save();
+        }
        
         $request->merge(['languages' => json_encode($request['languages'])]);
-
         $candidate->fill($request->input())->save();
 
-        return redirect()->route('dashboard.index', 'profile');
+        return redirect()->route('candidate.dashboard.index', 'profile');
     }
 
     public function apply (Job $job) {
@@ -30,7 +41,7 @@ class CandidateController extends Controller
         return back()->with('message', "Has posulado exitosamente");
     }
 
-    public function dashboard($word)
+    public function dashboard($word = 'dashboard')
     {
         if ($word == 'applications') {
 
@@ -42,5 +53,16 @@ class CandidateController extends Controller
         }
 
         return view('partials.dashboard.index', compact('word'));
+    }
+
+    public function updatePassword()
+    {
+        $this->validate(request(),[
+            'password' => ['confirmed', new StrengthPassword]
+        ]);
+        $user = auth()->user();
+        $user->password = bacrypt(request()->password);
+        $user->save();
+        return back()->with('message', "Contraseña guardada correctamente");
     }
 }

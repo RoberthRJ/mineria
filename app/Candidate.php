@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Job;
+use App\Province;
 use Illuminate\Database\Eloquent\Model;
 
 class Candidate extends Model
@@ -21,4 +22,8 @@ class Candidate extends Model
 	public function jobs () {
 		return $this->belongsToMany(Job::class);
 	}
+
+    public function province(){
+        return $this->belongsTo(Province::class);
+    }
 }

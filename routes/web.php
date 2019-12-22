@@ -33,7 +33,7 @@ Route::get('/jobs/category/{category}', 'JobController@jobByCategory')->name('jo
 
 Route::get('/jobs/subcategory/{subcategory}', 'JobController@list')->name('job.list');
 
-Route::get('/{department}/jobs', 'JobController@list')->name('job.list');
+Route::get('/{department}/jobs', 'JobController@jobByDepartment')->name('job.by.department');
 
 Route::get('/{department}/jobs/category/{category}', 'JobController@list')->name('job.list');
 
@@ -49,6 +49,8 @@ Route::get('/search/{keyword}/category/{category}', 'JobController@keywordCatego
 Route::get('/search/{keyword}', 'JobController@keywordGet')->name('job.keyword.get');
 
 Route::get('/date/{date}', 'JobController@date')->name('job.date');
+
+Route::get('/type/{type}', 'JobController@jobByType')->name('job.by.type');
 
 
 Route::post('/searchAjax', 'JobController@searchAyax')->name('search.ajax');
@@ -83,24 +85,27 @@ Route::group(['middleware' => ['auth']], function(){
 
 	Route::prefix('dashboard')->group(function () {
 
-		Route::get('/{word?}', function($word = 'dashboard'){
+		Route::get('/company/{word?}', 'CompanyController@dashboard')->name('company.dashboard.index')->middleware([sprintf("role:%s", \App\Role::COMPANY)])->where('word', 'dashboard|profile|password|manage|post');
+
+		Route::get('/company/candidates/{job}', 'CompanyController@candidates')->name('company.dashboard.candidates')->middleware([sprintf("role:%s", \App\Role::COMPANY)]);
+
+		Route::get('/candidate/{word?}', 'CandidateController@dashboard')->name('candidate.dashboard.index')->middleware([sprintf("role:%s", \App\Role::CANDIDATE)])->where('word', 'dashboard|profile|password|applications');
+
+		Route::put('/company/password', 'CompanyController@updatePassword')->name('company.password.update')->middleware([sprintf("role:%s", \App\Role::COMPANY)]);
+
+		Route::put('/candidate/password', 'CandidateController@updatePassword')->name('candidate.password.update')->middleware([sprintf("role:%s", \App\Role::CANDIDATE)]);
+
+		Route::get('/{word}', function($word = 'dashboard'){
 
 			return view('partials.dashboard.index', compact('word'));
 
-		})->name('dashboard.index')->where('word', 'dashboard|profile|password');
-
-		Route::get('/{word}/company', 'CompanyController@dashboard')->name('company.dashboard.index')->middleware([sprintf("role:%s", \App\Role::COMPANY)])->where('word', 'manage|post|candidates');
-
-		Route::get('/{word}/candidate', 'CandidateController@dashboard')->name('candidate.dashboard.index')->middleware([sprintf("role:%s", \App\Role::CANDIDATE)])->where('word', 'applications');
+		})->name('dashboard.index')->where('word', 'password');
 	});
 
-	// Route::get('/dashboard/{word?}', 'CompanyController@dashboard')->name('company.dashboard.index')->middleware([sprintf("role:%s", \App\Role::COMPANY)])->where('word', 'profile|manage|post|candidates|password');
-
-	// Route::get('/dashboard/{word?}', 'CandidateController@dashboard')->name('candidate.dashboard.index')->middleware([sprintf("role:%s", \App\Role::CANDIDATE)])->where('word', 'profile|applications|password');
 
 	Route::prefix('candidate')->group(function () {
 
-		Route::post('/profile/{candidate}', 'CandidateController@updateProfile')->name('update.candidate.profile')->middleware([sprintf("role:%s", \App\Role::CANDIDATE)]);
+		Route::put('/profile/{candidate}', 'CandidateController@updateProfile')->name('update.candidate.profile')->middleware([sprintf("role:%s", \App\Role::CANDIDATE)]);
 		
 	});
 
@@ -109,7 +114,7 @@ Route::group(['middleware' => ['auth']], function(){
 
 	Route::prefix('company')->group(function () {
 
-		Route::post('/profile/{company}', 'CompanyController@updateProfile')->name('update.company.profile')->middleware([sprintf("role:%s", \App\Role::COMPANY)]);
+		Route::put('/profile/{company}', 'CompanyController@updateProfile')->name('update.company.profile')->middleware([sprintf("role:%s", \App\Role::COMPANY)]);
 
 		Route::post('/post-job', 'JobController@store')->name('company.job.store')->middleware([sprintf("role:%s", \App\Role::COMPANY)]);
 		
