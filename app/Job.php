@@ -11,9 +11,12 @@ use App\Province;
 use App\Sector;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Job extends Model
 {
+	use SoftDeletes;
+	
     protected $table = "jobs";
     protected $guarded = ['id'];
 
@@ -30,8 +33,8 @@ class Job extends Model
 		return 'slug';
 	}
 
-	public function category () {
-		return $this->belongsTo(Category::class)->select('id', 'category');
+	public function subcategory () {
+		return $this->belongsTo(Subcategory::class);
 	}
 
 	public function province () {

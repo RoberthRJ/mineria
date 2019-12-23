@@ -1,8 +1,14 @@
 <div class="col-lg-9 col-md-12">
    <div class="dashboard-right">
       <div class="manage-jobs">
+         @if(session('message'))
+           <div class="alert alert-{{ session('message')['status'] }} alert-dismissible">
+             <button type="button" class="close" data-dismiss="alert">&times;</button>
+              {{ session('message')['message'] }}
+           </div>
+         @endif
          <div class="manage-jobs-heading">
-            <h3>My Job Listing</h3>
+            <h3>Mis ofertas de empleo publicadas</h3>
          </div>
          <div class="single-manage-jobs table-responsive">
             <table class="table">
@@ -24,8 +30,19 @@
                      <td><span class="pending">{{$job->status()}}</span></td>
                      <td class="action">
                         <a href="{{route('company.dashboard.candidates', $job->slug)}}" class="action-edit" title="Ver postulantes"><i class="fa fa-users"></i></a>
-                        <a href="#" class="action-edit" title="Editar"><i class="fa fa-pencil-square-o"></i></a>
-                        <a href="#" class="action-delete" title="Eliminar"><i class="fa fa-trash-o"></i></a>
+                        <a href="{{route('company.job.edit', $job->slug)}}" class="action-edit" title="Editar"><i class="fa fa-pencil-square-o"></i></a>
+                        <a href="{{ route('company.job.delete', $job->slug) }}"  
+                           class="action-delete" 
+                           title="Eliminar"
+                           onclick="event.preventDefault();
+                            document.getElementById('delete-job-form').submit();"
+                         >
+                             <i class="fa fa-trash-o"></i>
+                         </a>
+                        <form id="delete-job-form" action="{{ route('company.job.delete', $job->slug) }}" method="POST" style="display: none;">
+                             @csrf
+                             @method('DELETE')
+                         </form>
                      </td>
                   </tr>
                   @endforeach

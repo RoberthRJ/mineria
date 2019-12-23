@@ -1,8 +1,14 @@
 <div class="col-md-12 col-lg-9">
    <div class="dashboard-right">
       <div class="candidate-profile">
+         @if(session('message'))
+           <div class="alert alert-{{ session('message')['status'] }} alert-dismissible">
+             <button type="button" class="close" data-dismiss="alert">&times;</button>
+              {{ session('message')['message'] }}
+           </div>
+         @endif
          <div class="candidate-single-profile-info">
-            <form method="POST" action="{{route('update.company.profile', auth()->user()->company->id)}}"enctype="multipart/form-data" novalidate>
+            <form method="POST" action="{{route('company.profile.update')}}"enctype="multipart/form-data" novalidate>
                @csrf
                @method('PUT')
                <div class="single-resume-feild resume-avatar">
@@ -23,8 +29,6 @@
             <!-- </form> -->
          </div>
          <div class="candidate-single-profile-info">
-            <!-- <form method="POST" action="{{route('update.company.profile', auth()->user()->company->id)}}" novalidate>
-               @csrf -->
                <div class="resume-box">
                   <h3>Perfil de empresa</h3>
                   <div class="single-resume-feild feild-flex-2">
@@ -72,14 +76,14 @@
                                 <option {{ (int) old('department_id') === $id || auth()->user()->company->province->department->id === $id ? 'selected' : '' }} value="{{ $id }}">
                                     {{ $department }}
                                 </option>
-                            @endforeach
+                           @endforeach
                         </select>
                      </div>
                      <div class="single-input">
                         <label for="province_id">Provincia</label>
                         <select id="province_id" name="province_id">
                            <option value="">Provincia</option>
-                           @foreach(\App\Province::orderBy('province')->pluck('province', 'id') as $id => $province)
+                           @foreach(\App\Province::orderBy('province')->whereDepartmentId(auth()->user()->company->province->department->id)->pluck('province', 'id') as $id => $province)
                                 <option {{ (int) old('province_id') === $id || auth()->user()->company->province_id === $id ? 'selected' : '' }} value="{{ $id }}">
                                     {{ $province }}
                                 </option>

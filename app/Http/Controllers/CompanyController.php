@@ -33,7 +33,7 @@ class CompanyController extends Controller
         }
         $company->fill($request->input())->save();
 
-        return redirect()->route('company.dashboard.index', 'profile');
+        return back()->with('message', ['status' => 'success', 'message' => "Datos actualizados correctamente"]);
     }
 
     public function dashboard($word = 'dashboard')
@@ -50,6 +50,11 @@ class CompanyController extends Controller
             case 'manage':
                 $jobs = Job::whereCompanyId(auth()->user()->company->id)->orderBy('created_at', 'DESC')->paginate(12);
                 return view('partials.dashboard.index', compact('word', 'jobs'));
+                break;
+            case 'post':
+                $job = new Job;
+                $btn = "Crear oferta";
+                return view('partials.dashboard.index', compact('word', 'job', 'btn'));
                 break;
             default:
                 return view('partials.dashboard.index', compact('word'));

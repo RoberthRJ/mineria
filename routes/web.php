@@ -96,6 +96,20 @@ Route::group(['middleware' => ['auth']], function(){
 
 		Route::put('/company/password', 'CompanyController@updatePassword')->name('company.password.update')->middleware([sprintf("role:%s", \App\Role::COMPANY)]);
 
+		Route::put('/company/profile', 'CompanyController@updateProfile')->name('company.profile.update')->middleware([sprintf("role:%s", \App\Role::COMPANY)]);
+		
+		/*=====  JOB CRUD  ======*/
+
+		Route::post('/company/job/store', 'JobController@store')->name('company.job.store')->middleware([sprintf("role:%s", \App\Role::COMPANY)]);
+		
+		Route::get('/company/job/{job}/edit', 'jobController@edit')->name('company.job.edit')->middleware([sprintf("role:%s", \App\Role::COMPANY)]);
+
+		Route::put('/company/job/{job}/update', 'jobController@update')->name('company.job.update')->middleware([sprintf("role:%s", \App\Role::COMPANY)]);
+
+		Route::delete('/company/job/{job}/delete', 'jobController@delete')->name('company.job.delete')->middleware([sprintf("role:%s", \App\Role::COMPANY)]);
+
+		/*=====  END OF JOB CRUD  ======*/
+
 		Route::put('/candidate/password', 'CandidateController@updatePassword')->name('candidate.password.update')->middleware([sprintf("role:%s", \App\Role::CANDIDATE)]);
 
 		Route::get('/{word}', function($word = 'dashboard'){
@@ -112,16 +126,7 @@ Route::group(['middleware' => ['auth']], function(){
 		
 	});
 
-	Route::get('/{job}/apply', 'CandidateController@apply')->name('candidate.apply')->middleware([sprintf("role:%s", \App\Role::CANDIDATE)]);
-
-
-	Route::prefix('company')->group(function () {
-
-		Route::put('/profile/{company}', 'CompanyController@updateProfile')->name('update.company.profile')->middleware([sprintf("role:%s", \App\Role::COMPANY)]);
-
-		Route::post('/post-job', 'JobController@store')->name('company.job.store')->middleware([sprintf("role:%s", \App\Role::COMPANY)]);
-		
-	});	
+	Route::get('/{job}/apply', 'CandidateController@apply')->name('candidate.apply')->middleware([sprintf("role:%s", \App\Role::CANDIDATE)]);	
 		
 });
 

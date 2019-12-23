@@ -154,10 +154,7 @@ class JobController extends Controller
         }
 
         $data = \request('data');
-        // $title = $data['title'];
-        // $value = $data['value'];
-        // session(['title' => 'value']);
-        // $value = session('title');
+
         switch ($data['title']) {
             case "category":
                 $category = Category::whereId($data['value'])->first();
@@ -197,9 +194,29 @@ class JobController extends Controller
     {
         $request->merge(['company_id' => auth()->user()->company->id ?: 0 ]);   
         $request->merge(['slug' => str_slug($request['title'], '-')]);
-        // dd($request->all());
-        Job::create($request->input());
-        return back()->with('status', 'El empleo ha sido creado correctamente');
+        $input = $request->except(['category_id', 'department_id']);
+        Job::create($input);
+        return back()->with('message', ['status' => 'success', 'message' => "El anuncio de empleo ha sido creado correctamente"]);
+    }
+
+    public function edit(job $job)
+    {
+        $word = "post";
+        $btn = "Actualizar datos";
+        return view('partials.dashboard.index', compact('word', 'job', 'btn'));
+    }
+
+    public function update(Job $job, PostRequest $request)
+    {
+        $input = $request->except(['category_id', 'department_id']);
+        $job->fill($input)->save();
+        return back()->with('message', ['status' => 'success', 'message' => "El anuncio de empleo ha sido editado correctamente"]);
+    }
+
+    public function delete(job $job)
+    {
+        $job->delete();
+        return back()->with('message', ['status' => 'success', 'message' => "El anuncio de empleo ha sido correctamente eliminado"]);
     }
 
     public function secondAjax()
